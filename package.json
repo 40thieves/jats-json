@@ -1,0 +1,22 @@
+{
+  "name": "jats-json",
+  "version": "1.0.0",
+  "description": "JATS -> JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --recursive --compilers js:test/bootstrap/register-babel test/"
+  },
+  "author": "Alasdair Smith <ali@alasdairsmith.co.uk>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "chai": "^3.3.0",
+    "gulp": "^3.9.0",
+    "gulp-mocha": "^2.1.3",
+    "mocha": "^2.3.3",
+    "mocha-notifier-reporter": "^0.1.1"
+  },
+  "dependencies": {
+    "xmldom": "^0.1.19"
+  }
+}
