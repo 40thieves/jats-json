@@ -7,7 +7,10 @@ const expect = chai.expect
 const SIMPLE_XML_STRING = `
 	<article>
 		<body>
-			<sec>Lorem ipsum</sec>
+			<sec>
+				<title>Title</title>
+				<p>Lorem ipsum</p>
+			</sec>
 		</body>
 	</article>`
 
@@ -33,18 +36,40 @@ describe('Converter', () => {
 		expect(JSON.stringify(result)).to.be.a('string')
 	})
 
-	it.only('returns tree of parsed article', () => {
+	it('returns parsed tree from xml string', () => {
 		let converter = new Converter
 
 		let result = converter.import(SIMPLE_XML_STRING)
 
+
 		expect(result).to.deep.equal({
-			'article': {
-				children: [{
-					'body': {
-						'sec': 'Lorem ipsum'
+			type: 'root',
+			children: {
+				'article': {
+					type: 'article',
+					children: {
+						'body': {
+							type: 'body',
+							children: {
+								'sec': {
+									type: 'sec',
+									children: {
+										'title': {
+											type: 'title',
+											text: 'Title',
+											children: {}
+										},
+										'p': {
+											type: 'p',
+											text: 'Lorem ipsum',
+											children: {}
+										}
+									}
+								}
+							}
+						}
 					}
-				}]
+				}
 			}
 		})
 	})
