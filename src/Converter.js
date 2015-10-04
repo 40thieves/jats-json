@@ -8,6 +8,7 @@ export default class Converter {
 	constructor() {
 		this.parser = new DOMParser()
 		this._bodyNodes = this.initBodyNodes()
+		this._annotationNodes = this.initAnnotationNodes()
 
 		this.state = {
 			type: 'root',
@@ -25,6 +26,26 @@ export default class Converter {
 			},
 			'p': (node, state) => {
 				this.paragraph(node, state)
+			}
+		}
+	}
+
+	initAnnotationNodes() {
+		return {
+			'text': (node, state) => {
+				this.text(node, state)
+			},
+			'italic': (node, state) => {
+				this.italic(node, state)
+			},
+			'bold': (node, state) => {
+				this.bold(node, state)
+			},
+			'xref': (node, state) => {
+				this.xref(node, state)
+			},
+			'ext-link': (node, state) => {
+				this.extLink(node, state)
 			}
 		}
 	}
@@ -78,7 +99,7 @@ export default class Converter {
 	section(node, state) {
 		let section = {
 			type: 'sec',
-			children: {}
+			children: []
 		}
 
 		state.children.sec = section
@@ -89,21 +110,82 @@ export default class Converter {
 	title(node, state) {
 		let title = {
 			type: 'title',
-			text: node.childNodes.item(0).data,
-			children: {}
+			children: []
 		}
 
-		state.children.title = title
+		state.children.push(title)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, title))
 	}
 
 	paragraph(node, state) {
 		let para = {
 			type: 'p',
-			text: node.childNodes.item(0).data,
-			children: {}
+			children: []
 		}
 
-		state.children.p = para
+		state.children.push(para)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, para))
+	}
+
+	annotatedText(state, node) {
+		let type = getNodeType(node)
+
+		if (this._annotationNodes[type]) {
+			this._annotationNodes[type].call(this, node, state)
+		}
+	}
+
+	text(node, state) {
+		let data = node.data
+		const TABS_OR_NL = /[\t\n\r]+/g
+
+		data = data.replace(TABS_OR_NL, '')
+
+		let text = {
+			type: 'text',
+			data: data,
+			children: []
+		}
+
+		state.children.push(text)
+	}
+
+	italic(node, state) {
+		let italic = {
+			type: 'italic',
+			children: []
+		}
+
+		state.children.push(italic)
+	}
+
+	bold(node, state) {
+		let bold = {
+			type: 'bold',
+			children: []
+		}
+
+		state.children.push(bold)
+	}
+
+	xref(node, state) {
+		let xref = {
+			type: 'xref',
+			children: []
+		}
+
+		state.children.push(xref)
+	}
+
+	extLink(node, state) {
+		let extLink = {
+			type: 'ext-link',
+			children: []
+		}
+
+		state.children.push(extLink)
 	}
 
 }

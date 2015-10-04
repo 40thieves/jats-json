@@ -14,6 +14,20 @@ const SIMPLE_XML_STRING = `
 		</body>
 	</article>`
 
+const ANNOTATED_TEXT_XML_STRING = `
+		<article>
+			<body>
+				<sec>
+					<title>Title</title>
+					<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
+					Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec 
+					vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio 
+					lectus eleifend <ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf" 
+					xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
+				</sec>
+			</body>
+		</article>`
+
 describe('Converter', () => {
 
 	it('can be initialized', () => {
@@ -41,7 +55,6 @@ describe('Converter', () => {
 
 		let result = converter.import(SIMPLE_XML_STRING)
 
-
 		expect(result).to.deep.equal({
 			type: 'root',
 			children: {
@@ -53,18 +66,28 @@ describe('Converter', () => {
 							children: {
 								'sec': {
 									type: 'sec',
-									children: {
-										'title': {
+									children: [
+										{
 											type: 'title',
-											text: 'Title',
-											children: {}
+											children: [
+												{
+													type: 'text',
+													data: 'Title',
+													children: []
+												}
+											]
 										},
-										'p': {
+										{
 											type: 'p',
-											text: 'Lorem ipsum',
-											children: {}
+											children: [
+												{
+													type: 'text',
+													data: 'Lorem ipsum',
+													children: []
+												}
+											]
 										}
-									}
+									]
 								}
 							}
 						}
@@ -72,6 +95,64 @@ describe('Converter', () => {
 				}
 			}
 		})
+	})
+
+	it('parses annotated text', () => {
+		let converter = new Converter
+
+		let result = converter.import(ANNOTATED_TEXT_XML_STRING)
+
+		let para = result.children.article.children.body.children.sec.children
+
+		expect(para).to.deep.equal([
+			{
+				type: 'title',
+				children: [
+					{
+						type: 'text',
+						data: 'Title',
+						children: []
+					}
+				]
+			},
+			{
+				type: 'p',
+				children: [
+					{
+						type: 'text',
+						data: 'Lorem ',
+						children: []
+					},
+					{
+						type: 'italic',
+						children: []
+					},
+					{
+						type: 'text',
+						data: ' dolor sit amet, consectetur ',
+						children: []
+					},
+					{
+						type: 'xref',
+						children: []
+					},
+					{
+						type: 'text',
+						data: ' adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio lectus eleifend ',
+						children: []
+					},
+					{
+						type: 'ext-link',
+						children: []
+					},
+					{
+						type: 'text',
+						data: '.',
+						children: []
+					}
+				]
+			}
+		])
 	})
 
 })
