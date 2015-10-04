@@ -43,14 +43,14 @@ describe('Converter', () => {
 
 		expect(result).to.deep.equal({
 			type: 'root',
-			children: {
-				'article': {
+			children: [
+				{
 					type: 'article',
-					children: {
-						'body': {
+					children: [
+						{
 							type: 'body',
-							children: {
-								'sec': {
+							children: [
+								{
 									type: 'sec',
 									children: [
 										{
@@ -75,11 +75,11 @@ describe('Converter', () => {
 										}
 									]
 								}
-							}
+							]
 						}
-					}
+					]
 				}
-			}
+			]
 		})
 	})
 
@@ -90,7 +90,7 @@ describe('Converter', () => {
 			<article>
 				<body>
 					<sec>
-						<title>Title</title>
+						<title>Title with <bold>styling</bold></title>
 						<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
 						Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec 
 						vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio 
@@ -100,16 +100,26 @@ describe('Converter', () => {
 				</body>
 			</article>`)
 
-		let para = result.children.article.children.body.children.sec.children
+		let paragraph = result.children[0].children[0].children[0].children
 
-		expect(para).to.deep.equal([
+		expect(paragraph).to.deep.equal([
 			{
 				type: 'title',
 				children: [
 					{
 						type: 'text',
-						data: 'Title',
+						data: 'Title with ',
 						children: []
+					},
+					{
+						type: 'bold',
+						children: [
+							{
+								type: 'text',
+								data: 'styling',
+								children: []
+							}
+						]
 					}
 				]
 			},
@@ -123,7 +133,13 @@ describe('Converter', () => {
 					},
 					{
 						type: 'italic',
-						children: []
+						children: [
+							{
+								type: 'text',
+								data: 'ipsum',
+								children: []
+							}
+						]
 					},
 					{
 						type: 'text',
@@ -132,7 +148,13 @@ describe('Converter', () => {
 					},
 					{
 						type: 'xref',
-						children: []
+						children: [
+							{
+								type: 'text',
+								data: 'Figure 1',
+								children: []
+							}
+						]
 					},
 					{
 						type: 'text',
@@ -141,12 +163,68 @@ describe('Converter', () => {
 					},
 					{
 						type: 'ext-link',
-						children: []
+						children: [
+							{
+								type: 'text',
+								data: 'felis',
+								children: []
+							}
+						]
 					},
 					{
 						type: 'text',
 						data: '.',
 						children: []
+					}
+				]
+			}
+		])
+	})
+
+	it('parses nested annotated text', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							Text <bold>with <italic>styling</italic></bold>
+						</p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children
+
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'p',
+				children: [
+					{
+						type: 'text',
+						data: 'Text ',
+						children: []
+					},
+					{
+						type: 'bold',
+						children: [
+							{
+								type: 'text',
+								data: 'with ',
+								children: []
+							},
+							{
+								type: 'italic',
+								children: [
+									{
+										type: 'text',
+										data: 'styling',
+										children: []
+									}
+								]
+							}
+						]
 					}
 				]
 			}

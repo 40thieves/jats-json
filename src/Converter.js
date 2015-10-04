@@ -12,7 +12,7 @@ export default class Converter {
 
 		this.state = {
 			type: 'root',
-			children: {}
+			children: []
 		}
 	}
 
@@ -67,10 +67,10 @@ export default class Converter {
 
 		let article = {
 			type: 'article',
-			children: {}
+			children: []
 		}
 
-		state.children.article = article
+		state.children.push(article)
 
 		this.body(node, article)
 	}
@@ -80,10 +80,10 @@ export default class Converter {
 
 		let body = {
 			type: 'body',
-			children: {}
+			children: []
 		}
 
-		state.children.body = body
+		state.children.push(body)
 
 		Array.prototype.slice.call(node.childNodes).map(this.bodyNode.bind(this, body))
 	}
@@ -102,7 +102,7 @@ export default class Converter {
 			children: []
 		}
 
-		state.children.sec = section
+		state.children.push(section)
 
 		Array.prototype.slice.call(node.childNodes).map(this.bodyNode.bind(this, section))
 	}
@@ -143,6 +143,8 @@ export default class Converter {
 
 		data = data.replace(TABS_OR_NL, '')
 
+		if ( ! data) return
+
 		let text = {
 			type: 'text',
 			data: data,
@@ -159,6 +161,8 @@ export default class Converter {
 		}
 
 		state.children.push(italic)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, italic))
 	}
 
 	bold(node, state) {
@@ -168,6 +172,8 @@ export default class Converter {
 		}
 
 		state.children.push(bold)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, bold))
 	}
 
 	xref(node, state) {
@@ -177,6 +183,8 @@ export default class Converter {
 		}
 
 		state.children.push(xref)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, xref))
 	}
 
 	extLink(node, state) {
@@ -186,6 +194,8 @@ export default class Converter {
 		}
 
 		state.children.push(extLink)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, extLink))
 	}
 
 }
