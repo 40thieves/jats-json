@@ -42,6 +42,18 @@ export default class Converter {
 			'bold': (node, state) => {
 				this.bold(node, state)
 			},
+			'monospace': (node, state) => {
+				this.code(node, state)
+			},
+			'sub': (node, state) => {
+				this.subscript(node, state)
+			},
+			'sup': (node, state) => {
+				this.superscript(node, state)
+			},
+			'underline': (node, state) => {
+				this.underline(node, state)
+			},
 			'xref': (node, state) => {
 				this.xref(node, state)
 			},
@@ -184,6 +196,50 @@ export default class Converter {
 		state.children.push(bold)
 
 		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, bold))
+	}
+
+	code(node, state) {
+		let code = {
+			type: 'code',
+			children: []
+		}
+
+		state.children.push(code)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, code))
+	}
+
+	subscript(node, state) {
+		let subscript = {
+			type: 'subscript',
+			children: []
+		}
+
+		state.children.push(subscript)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, subscript))
+	}
+
+	superscript(node, state) {
+		let superscript = {
+			type: 'superscript',
+			children: []
+		}
+
+		state.children.push(superscript)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, superscript))
+	}
+
+	underline(node, state) {
+		let underline = {
+			type: 'underline',
+			children: []
+		}
+
+		state.children.push(underline)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, underline))
 	}
 
 	xref(node, state) {
