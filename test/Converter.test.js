@@ -147,7 +147,8 @@ describe('Converter', () => {
 						children: []
 					},
 					{
-						type: 'xref',
+						type: 'figure_reference',
+						target: 'fig1',
 						children: [
 							{
 								type: 'text',
@@ -163,6 +164,7 @@ describe('Converter', () => {
 					},
 					{
 						type: 'ext-link',
+						url: 'http://example.com/x.pdf',
 						children: [
 							{
 								type: 'text',
@@ -195,8 +197,7 @@ describe('Converter', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children
-
+		let paragraph = result.children[0].children[0].children[0].children // Skip past article/body/sec stuff
 		expect(paragraph).to.deep.equal([
 			{
 				type: 'p',
@@ -229,6 +230,87 @@ describe('Converter', () => {
 				]
 			}
 		])
+	})
+
+	it('parses xref metadata', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							<xref ref-type="fig" rid="fig1">Figure 1</xref>
+						</p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'figure_reference',
+				target: 'fig1',
+				children: [
+					{
+						type: 'text',
+						data: 'Figure 1',
+						children: []
+					}
+				]
+			}
+		])
+	})
+
+	it('parses external link metadata', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							<ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf" xmlns:xlink="http://www.w3.org/1999/xlink">Link</ext-link>
+						</p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'ext-link',
+				url: 'http://example.com/x.pdf',
+				children: [
+					{
+						type: 'text',
+						data: 'Link',
+						children: []
+					}
+				]
+			}
+		])
+	})
+
+	it('normalises urls in external link metadata', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							<ext-link ext-link-type="uri" xlink:href="example.com/x.pdf" xmlns:xlink="http://www.w3.org/1999/xlink">Link</ext-link>
+						</p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
+
+		expect(paragraph.url).to.equal('http://example.com/x.pdf')
 	})
 
 })

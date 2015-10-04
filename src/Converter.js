@@ -1,4 +1,5 @@
 import { DOMParser } from 'xmldom'
+import normaliseUrl from 'normalize-url'
 
 import { isString } from './utils'
 import { getNodeType } from './dom-utils'
@@ -49,6 +50,15 @@ export default class Converter {
 			}
 		}
 	}
+
+	static xrefTypes = {
+		'bibr': 'citation_reference',
+		'fig': 'figure_reference',
+		'table': 'figure_reference',
+		'supplementary-material': 'figure_reference',
+		'other': 'figure_reference',
+		'list': 'definition_reference',
+	  }
 
 	import(input) {
 		let xml = this.convertToXml(input)
@@ -177,10 +187,15 @@ export default class Converter {
 	}
 
 	xref(node, state) {
+		let type = Converter.xrefTypes[node.getAttribute('ref-type')] || 'cross_reference'
+
 		let xref = {
-			type: 'xref',
+			type: type,
 			children: []
 		}
+
+		let targetId = node.getAttribute('rid')
+		if (targetId) xref.target = targetId
 
 		state.children.push(xref)
 
@@ -188,8 +203,11 @@ export default class Converter {
 	}
 
 	extLink(node, state) {
+		let url = normaliseUrl(node.getAttribute('xlink:href'))
+
 		let extLink = {
 			type: 'ext-link',
+			url: url,
 			children: []
 		}
 
