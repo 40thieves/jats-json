@@ -14,20 +14,6 @@ const SIMPLE_XML_STRING = `
 		</body>
 	</article>`
 
-const ANNOTATED_TEXT_XML_STRING = `
-		<article>
-			<body>
-				<sec>
-					<title>Title</title>
-					<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
-					Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec 
-					vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio 
-					lectus eleifend <ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf" 
-					xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
-				</sec>
-			</body>
-		</article>`
-
 describe('Converter', () => {
 
 	it('can be initialized', () => {
@@ -100,7 +86,19 @@ describe('Converter', () => {
 	it('parses annotated text', () => {
 		let converter = new Converter
 
-		let result = converter.import(ANNOTATED_TEXT_XML_STRING)
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<title>Title</title>
+						<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
+						Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec 
+						vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio 
+						lectus eleifend <ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf" 
+						xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
+					</sec>
+				</body>
+			</article>`)
 
 		let para = result.children.article.children.body.children.sec.children
 
