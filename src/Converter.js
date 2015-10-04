@@ -59,6 +59,9 @@ export default class Converter {
 			},
 			'ext-link': (node, state) => {
 				this.extLink(node, state)
+			},
+			'uri': (node, state) => {
+				this.extLink(node, state)
 			}
 		}
 	}
@@ -265,7 +268,7 @@ export default class Converter {
 		if (linkType.toLowerCase() === 'doi') url = `http://dx.doi.org/${url}`
 
 		let extLink = {
-			type: 'ext-link',
+			type: 'link',
 			url: normaliseUrl(url),
 			children: []
 		}

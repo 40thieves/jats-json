@@ -253,12 +253,47 @@ describe('Annotations', () => {
 
 		expect(paragraph).to.deep.equal([
 			{
-				type: 'ext-link',
+				type: 'link',
 				url: 'http://example.com/x.pdf',
 				children: [
 					{
 						type: 'text',
 						data: 'Link',
+						children: []
+					}
+				]
+			}
+		])
+	})
+
+	
+	it('parses uris', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>Foo <uri xlink:href="http://example.com/x.pdf">Bar</uri></p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'text',
+				data: 'Foo ',
+				children: []
+			},
+			{
+				type: 'link',
+				url: 'http://example.com/x.pdf',
+				children: [
+					{
+						type: 'text',
+						data: 'Bar',
 						children: []
 					}
 				]
