@@ -259,11 +259,14 @@ export default class Converter {
 	}
 
 	extLink(node, state) {
-		let url = normaliseUrl(node.getAttribute('xlink:href'))
+		let url = node.getAttribute('xlink:href')
+
+		let linkType = node.getAttribute('ext-link-type')
+		if (linkType.toLowerCase() === 'doi') url = `http://dx.doi.org/${url}`
 
 		let extLink = {
 			type: 'ext-link',
-			url: url,
+			url: normaliseUrl(url),
 			children: []
 		}
 
