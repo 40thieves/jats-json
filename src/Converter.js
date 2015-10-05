@@ -10,11 +10,6 @@ export default class Converter {
 		this.parser = new DOMParser()
 		this._bodyNodes = this.initBodyNodes()
 		this._annotationNodes = this.initAnnotationNodes()
-
-		this.state = {
-			type: 'root',
-			children: []
-		}
 	}
 
 	initBodyNodes() {
@@ -81,9 +76,14 @@ export default class Converter {
 	import(input) {
 		let xml = this.convertToXml(input)
 
-		this.article(xml, this.state)
+		let initialState = {
+			type: 'root',
+			children: []
+		}
 
-		return this.state
+		this.article(xml, initialState)
+
+		return initialState
 	}
 
 	convertToXml(input) {
