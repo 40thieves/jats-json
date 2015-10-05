@@ -15,3 +15,7 @@ export function getNodeType(node) {
 		throw new Error('Unknown Node Type')
 	}
 }
+
+export function mapNodes(nodes, cb) {
+	Array.prototype.slice.call(nodes).map(cb)
+}

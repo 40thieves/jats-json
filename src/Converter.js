@@ -2,7 +2,7 @@ import { DOMParser } from 'xmldom'
 import normaliseUrl from 'normalize-url'
 
 import { isString } from './utils'
-import { getNodeType, TEXT_NODE } from './dom-utils'
+import { getNodeType, mapNodes, TEXT_NODE } from './dom-utils'
 
 export default class Converter {
 
@@ -113,7 +113,7 @@ export default class Converter {
 
 		state.children.push(body)
 
-		Array.prototype.slice.call(node.childNodes).map(this.bodyNode.bind(this, body))
+		mapNodes(node.childNodes, this.bodyNode.bind(this, body))
 	}
 
 	bodyNode(state, node) {
@@ -132,7 +132,7 @@ export default class Converter {
 
 		state.children.push(section)
 
-		Array.prototype.slice.call(node.childNodes).map(this.bodyNode.bind(this, section))
+		mapNodes(node.childNodes, this.bodyNode.bind(this, section))
 	}
 
 	title(node, state) {
@@ -143,7 +143,7 @@ export default class Converter {
 
 		state.children.push(title)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, title))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, title))
 	}
 
 	paragraph(node, state) {
@@ -154,7 +154,7 @@ export default class Converter {
 
 		state.children.push(para)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, para))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, para))
 	}
 
 	annotatedText(state, node) {
@@ -190,7 +190,7 @@ export default class Converter {
 
 		state.children.push(italic)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, italic))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, italic))
 	}
 
 	bold(node, state) {
@@ -201,7 +201,7 @@ export default class Converter {
 
 		state.children.push(bold)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, bold))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, bold))
 	}
 
 	code(node, state) {
@@ -212,7 +212,7 @@ export default class Converter {
 
 		state.children.push(code)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, code))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, code))
 	}
 
 	subscript(node, state) {
@@ -223,7 +223,7 @@ export default class Converter {
 
 		state.children.push(subscript)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, subscript))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, subscript))
 	}
 
 	superscript(node, state) {
@@ -234,7 +234,7 @@ export default class Converter {
 
 		state.children.push(superscript)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, superscript))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, superscript))
 	}
 
 	underline(node, state) {
@@ -245,7 +245,7 @@ export default class Converter {
 
 		state.children.push(underline)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, underline))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, underline))
 	}
 
 	xref(node, state) {
@@ -261,7 +261,7 @@ export default class Converter {
 
 		state.children.push(xref)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, xref))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, xref))
 	}
 
 	extLink(node, state) {
@@ -278,7 +278,7 @@ export default class Converter {
 
 		state.children.push(extLink)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, extLink))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, extLink))
 	}
 
 	email(node, state) {
@@ -294,7 +294,7 @@ export default class Converter {
 
 		state.children.push(email)
 
-		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, email))
+		mapNodes(node.childNodes, this.annotatedText.bind(this, email))
 	}
 
 }
