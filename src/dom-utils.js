@@ -16,6 +16,8 @@ export function getNodeType(node) {
 	}
 }
 
-export function mapNodes(nodes, cb) {
-	Array.prototype.slice.call(nodes).map(cb)
+export function mapChildNodes(node, cb, state) {
+	Array.prototype.slice.call(node.childNodes).map(node => {
+		return cb(node, state)
+	})
 }

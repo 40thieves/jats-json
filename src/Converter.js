@@ -1,8 +1,8 @@
 import { DOMParser } from 'xmldom'
 import normaliseUrl from 'normalize-url'
 
-import { isString } from './utils'
-import { getNodeType, mapNodes, TEXT_NODE } from './dom-utils'
+import { isString, autobind } from './utils'
+import { getNodeType, mapChildNodes, TEXT_NODE } from './dom-utils'
 
 export default class Converter {
 
@@ -113,10 +113,11 @@ export default class Converter {
 
 		state.children.push(body)
 
-		mapNodes(node.childNodes, this.bodyNode.bind(this, body))
+		mapChildNodes(node, this.bodyNode, body)
 	}
 
-	bodyNode(state, node) {
+	@autobind
+	bodyNode(node, state) {
 		let type = getNodeType(node)
 
 		if (this._bodyNodes[type]) {
@@ -132,7 +133,7 @@ export default class Converter {
 
 		state.children.push(section)
 
-		mapNodes(node.childNodes, this.bodyNode.bind(this, section))
+		mapChildNodes(node, this.bodyNode, section)
 	}
 
 	title(node, state) {
@@ -143,7 +144,7 @@ export default class Converter {
 
 		state.children.push(title)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, title))
+		mapChildNodes(node, this.annotatedText, title)
 	}
 
 	paragraph(node, state) {
@@ -154,10 +155,11 @@ export default class Converter {
 
 		state.children.push(para)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, para))
+		mapChildNodes(node, this.annotatedText, para)
 	}
 
-	annotatedText(state, node) {
+	@autobind
+	annotatedText(node, state) {
 		let type = getNodeType(node)
 
 		if (this._annotationNodes[type]) {
@@ -190,7 +192,7 @@ export default class Converter {
 
 		state.children.push(italic)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, italic))
+		mapChildNodes(node, this.annotatedText, italic)
 	}
 
 	bold(node, state) {
@@ -201,7 +203,7 @@ export default class Converter {
 
 		state.children.push(bold)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, bold))
+		mapChildNodes(node, this.annotatedText, bold)
 	}
 
 	code(node, state) {
@@ -212,7 +214,7 @@ export default class Converter {
 
 		state.children.push(code)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, code))
+		mapChildNodes(node, this.annotatedText, code)
 	}
 
 	subscript(node, state) {
@@ -223,7 +225,7 @@ export default class Converter {
 
 		state.children.push(subscript)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, subscript))
+		mapChildNodes(node, this.annotatedText, subscript)
 	}
 
 	superscript(node, state) {
@@ -234,7 +236,7 @@ export default class Converter {
 
 		state.children.push(superscript)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, superscript))
+		mapChildNodes(node, this.annotatedText, superscript)
 	}
 
 	underline(node, state) {
@@ -245,7 +247,7 @@ export default class Converter {
 
 		state.children.push(underline)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, underline))
+		mapChildNodes(node, this.annotatedText, underline)
 	}
 
 	xref(node, state) {
@@ -261,7 +263,7 @@ export default class Converter {
 
 		state.children.push(xref)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, xref))
+		mapChildNodes(node, this.annotatedText, xref)
 	}
 
 	extLink(node, state) {
@@ -278,7 +280,7 @@ export default class Converter {
 
 		state.children.push(extLink)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, extLink))
+		mapChildNodes(node, this.annotatedText, extLink)
 	}
 
 	email(node, state) {
@@ -294,7 +296,7 @@ export default class Converter {
 
 		state.children.push(email)
 
-		mapNodes(node.childNodes, this.annotatedText.bind(this, email))
+		mapChildNodes(node, this.annotatedText, email)
 	}
 
 }
