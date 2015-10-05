@@ -2,7 +2,7 @@ import { DOMParser } from 'xmldom'
 import normaliseUrl from 'normalize-url'
 
 import { isString } from './utils'
-import { getNodeType } from './dom-utils'
+import { getNodeType, TEXT_NODE } from './dom-utils'
 
 export default class Converter {
 
@@ -62,6 +62,9 @@ export default class Converter {
 			},
 			'uri': (node, state) => {
 				this.extLink(node, state)
+			},
+			'email': (node, state) => {
+				this.email(node, state)
 			}
 		}
 	}
@@ -276,6 +279,22 @@ export default class Converter {
 		state.children.push(extLink)
 
 		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, extLink))
+	}
+
+	email(node, state) {
+		let email = {
+			type: 'email',
+			children: []
+		}
+
+		let textNode = node.firstChild
+		if (textNode && textNode.nodeType === TEXT_NODE) {
+			email.url = `mailto:${textNode.data}`
+		}
+
+		state.children.push(email)
+
+		Array.prototype.slice.call(node.childNodes).map(this.annotatedText.bind(this, email))
 	}
 
 }

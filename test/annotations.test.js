@@ -301,6 +301,58 @@ describe('Annotations', () => {
 		])
 	})
 
+	it('parses emails', () => {
+		let converter = new Converter
+
+		let result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							Foo <email>foo@example.com</email>
+							<email><italic>bar@example.com</italic></email>
+						</p>
+					</sec>
+				</body>
+			</article>`)
+
+		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'text',
+				data: 'Foo ',
+				children: []
+			},
+			{
+				type: 'email',
+				url: 'mailto:foo@example.com',
+				children: [
+					{
+						type: 'text',
+						data: 'foo@example.com',
+						children: []
+					}
+				]
+			},
+			{
+				type: 'email', // No mailto url because immediate child is not a text node
+				children: [
+					{
+						type: 'italic',
+						children: [
+							{
+								type: 'text',
+								data: 'bar@example.com',
+								children: []
+							}
+						]
+					}
+				]
+			}
+		])
+	})
+
 	it('normalises urls in external link metadata', () => {
 		let converter = new Converter
 
