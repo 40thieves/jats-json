@@ -1,6 +1,7 @@
 import chai from 'chai'
 
 import Converter from '../src'
+import ConverterError from '../src/ConverterError'
 
 const expect = chai.expect
 
@@ -34,6 +35,14 @@ describe('Converter', () => {
 		let result = converter.import(SIMPLE_XML_STRING)
 
 		expect(JSON.stringify(result)).to.be.a('string')
+	})
+
+	it('takes exception to xml with no <article>', () => {
+		let converter = new Converter
+
+		let fn = () => converter.import('<foo><bar>baz</bar></foo>')
+
+		expect(fn).to.throw(ConverterError)
 	})
 
 	it('returns parsed tree from xml string', () => {

@@ -3,6 +3,7 @@ import normaliseUrl from 'normalize-url'
 
 import { isString, autobind } from './utils'
 import { getNodeType, mapChildNodes, TEXT_NODE } from './dom-utils'
+import ConverterError from './ConverterError'
 
 export default class Converter {
 
@@ -92,6 +93,8 @@ export default class Converter {
 
 	article(xml, state) {
 		let node = xml.getElementsByTagName('article').item(0)
+
+		if ( ! node) throw new ConverterError('No <article> element')
 
 		let article = {
 			type: 'article',
