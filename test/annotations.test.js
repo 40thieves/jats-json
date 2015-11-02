@@ -11,6 +11,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <italic>Bar</italic></p>
@@ -44,6 +45,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <bold>Bar</bold></p>
@@ -77,6 +79,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <monospace>Bar</monospace></p>
@@ -110,6 +113,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <sub>Bar</sub></p>
@@ -143,6 +147,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <sup>Bar</sup></p>
@@ -176,6 +181,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <underline>Bar</underline></p>
@@ -209,6 +215,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>
@@ -240,6 +247,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>
@@ -272,6 +280,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>Foo <uri xlink:href="http://example.com/x.pdf">Bar</uri></p>
@@ -306,6 +315,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>
@@ -358,6 +368,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>
@@ -377,6 +388,7 @@ describe('Annotations', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>

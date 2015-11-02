@@ -7,6 +7,7 @@ const expect = chai.expect
 
 const SIMPLE_XML_STRING = `
 	<article>
+		<article-meta></article-meta>
 		<body>
 			<sec>
 				<title>Title</title>
@@ -40,9 +41,17 @@ describe('Converter', () => {
 	it('takes exception to xml with no <article>', () => {
 		const converter = new Converter
 
-		const fn = () => converter.import('<foo><bar>baz</bar></foo>')
+		const fn = () => converter.import('<article-meta><foo>bar</foo></article-meta>')
 
-		expect(fn).to.throw(ConverterError)
+		expect(fn).to.throw(ConverterError, 'No <article> element')
+	})
+
+	it('takes exception to xml with no <article-meta>', () => {
+		const converter = new Converter
+
+		const fn = () => converter.import('<article><foo>bar</foo></article>')
+
+		expect(fn).to.throw(ConverterError, 'No <article-meta> element')
 	})
 
 	it('returns parsed tree from xml string', () => {
@@ -52,6 +61,11 @@ describe('Converter', () => {
 
 		expect(result).to.deep.equal({
 			type: 'root',
+			meta: [
+				{
+					type: 'article-meta'
+				}
+			],
 			article: [
 				{
 					type: 'article',

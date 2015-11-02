@@ -79,9 +79,11 @@ export default class Converter {
 
 		const initialState = {
 			type: 'root',
-			article: []
+			article: [],
+			meta: []
 		}
 
+		this.articleMeta(xml, initialState)
 		this.article(xml, initialState)
 
 		return initialState
@@ -89,6 +91,18 @@ export default class Converter {
 
 	convertToXml(input) {
 		return this.parser.parseFromString(input)
+	}
+
+	articleMeta(xml, state) {
+		const node = xml.getElementsByTagName('article-meta')[0]
+
+		if ( ! node) throw new ConverterError('No <article-meta> element')
+
+		const meta = {
+			type: 'article-meta'
+		}
+
+		state.meta.push(meta)
 	}
 
 	article(xml, state) {
