@@ -7,9 +7,9 @@ const expect = chai.expect
 describe('Annotations', () => {
 
 	it('parses italic', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -18,7 +18,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -40,9 +40,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses bold', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -51,7 +51,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -73,9 +73,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses code', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -84,7 +84,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -106,9 +106,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses subscript', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -117,7 +117,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -139,9 +139,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses superscript', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -150,7 +150,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -172,9 +172,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses underline', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -183,7 +183,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -205,9 +205,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses xref', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -218,7 +218,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -236,9 +236,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses external links', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -249,7 +249,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -268,9 +268,9 @@ describe('Annotations', () => {
 
 	
 	it('parses uris', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -279,7 +279,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -302,9 +302,9 @@ describe('Annotations', () => {
 	})
 
 	it('parses emails', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -316,7 +316,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -354,9 +354,9 @@ describe('Annotations', () => {
 	})
 
 	it('normalises urls in external link metadata', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -367,15 +367,15 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
 
 		expect(paragraph.url).to.equal('http://example.com/x.pdf')
 	})
 
 	it('normalises urls in external link metadata', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(`
+		const result = converter.import(`
 			<article>
 				<body>
 					<sec>
@@ -386,7 +386,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		let paragraph = result.children[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
+		const paragraph = result.children[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
 
 		expect(paragraph.url).to.equal('http://dx.doi.org/10.7554/eLife.00299.003')
 	})
