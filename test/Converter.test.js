@@ -52,7 +52,7 @@ describe('Converter', () => {
 
 		expect(result).to.deep.equal({
 			type: 'root',
-			children: [
+			article: [
 				{
 					type: 'article',
 					children: [
@@ -108,7 +108,7 @@ describe('Converter', () => {
 					</body>
 				</article>`)
 
-			const paragraph = result.children[0].children[0].children[0].children
+			const paragraph = result.article[0].children[0].children[0].children
 
 			expect(paragraph).to.deep.equal([
 				{
@@ -205,7 +205,7 @@ describe('Converter', () => {
 					</body>
 				</article>`)
 
-			const paragraph = result.children[0].children[0].children[0].children // Skip past article/body/sec stuff
+			const paragraph = result.article[0].children[0].children[0].children // Skip past article/body/sec stuff
 			expect(paragraph).to.deep.equal([
 				{
 					type: 'p',

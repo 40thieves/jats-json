@@ -79,7 +79,7 @@ export default class Converter {
 
 		const initialState = {
 			type: 'root',
-			children: []
+			article: []
 		}
 
 		this.article(xml, initialState)
@@ -101,7 +101,7 @@ export default class Converter {
 			children: []
 		}
 
-		state.children.push(article)
+		state.article.push(article)
 
 		this.body(node, article)
 	}
