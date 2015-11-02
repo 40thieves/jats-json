@@ -18,37 +18,37 @@ const SIMPLE_XML_STRING = `
 describe('Converter', () => {
 
 	it('can be initialized', () => {
-		let converter = new Converter
+		const converter = new Converter
 		expect(converter).to.be.an.instanceOf(Converter)
 	})
 
 	it('accepts strings', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let fn = () => converter.import(SIMPLE_XML_STRING) // Wrap in fn to prevent immediate invocation
+		const fn = () => converter.import(SIMPLE_XML_STRING) // Wrap in fn to prevent immediate invocation
 		expect(fn).to.not.throw(Error)
 	})
 
 	it('returns an object than can be stringified to JSON', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(SIMPLE_XML_STRING)
+		const result = converter.import(SIMPLE_XML_STRING)
 
 		expect(JSON.stringify(result)).to.be.a('string')
 	})
 
 	it('takes exception to xml with no <article>', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let fn = () => converter.import('<foo><bar>baz</bar></foo>')
+		const fn = () => converter.import('<foo><bar>baz</bar></foo>')
 
 		expect(fn).to.throw(ConverterError)
 	})
 
 	it('returns parsed tree from xml string', () => {
-		let converter = new Converter
+		const converter = new Converter
 
-		let result = converter.import(SIMPLE_XML_STRING)
+		const result = converter.import(SIMPLE_XML_STRING)
 
 		expect(result).to.deep.equal({
 			type: 'root',
@@ -92,9 +92,9 @@ describe('Converter', () => {
 		})
 
 		it('parses multiple annotations in a paragraph', () => {
-			let converter = new Converter
+			const converter = new Converter
 
-			let result = converter.import(`
+			const result = converter.import(`
 				<article>
 					<body>
 						<sec>
@@ -108,7 +108,7 @@ describe('Converter', () => {
 					</body>
 				</article>`)
 
-			let paragraph = result.children[0].children[0].children[0].children
+			const paragraph = result.children[0].children[0].children[0].children
 
 			expect(paragraph).to.deep.equal([
 				{
@@ -192,9 +192,9 @@ describe('Converter', () => {
 		})
 
 		it('parses nested annotated text', () => {
-			let converter = new Converter
+			const converter = new Converter
 
-			let result = converter.import(`
+			const result = converter.import(`
 				<article>
 					<body>
 						<sec>
@@ -205,7 +205,7 @@ describe('Converter', () => {
 					</body>
 				</article>`)
 
-			let paragraph = result.children[0].children[0].children[0].children // Skip past article/body/sec stuff
+			const paragraph = result.children[0].children[0].children[0].children // Skip past article/body/sec stuff
 			expect(paragraph).to.deep.equal([
 				{
 					type: 'p',

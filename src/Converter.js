@@ -75,9 +75,9 @@ export default class Converter {
 	  }
 
 	import(input) {
-		let xml = this.convertToXml(input)
+		const xml = this.convertToXml(input)
 
-		let initialState = {
+		const initialState = {
 			type: 'root',
 			children: []
 		}
@@ -92,11 +92,11 @@ export default class Converter {
 	}
 
 	article(xml, state) {
-		let node = xml.getElementsByTagName('article').item(0)
+		const node = xml.getElementsByTagName('article').item(0)
 
 		if ( ! node) throw new ConverterError('No <article> element')
 
-		let article = {
+		const article = {
 			type: 'article',
 			children: []
 		}
@@ -107,9 +107,9 @@ export default class Converter {
 	}
 
 	body(article, state) {
-		let node = article.getElementsByTagName('body').item(0)
+		const node = article.getElementsByTagName('body').item(0)
 
-		let body = {
+		const body = {
 			type: 'body',
 			children: []
 		}
@@ -121,7 +121,7 @@ export default class Converter {
 
 	@autobind
 	bodyNode(node, state) {
-		let type = getNodeType(node)
+		const type = getNodeType(node)
 
 		if (this._bodyNodes[type]) {
 			this._bodyNodes[type].call(this, node, state)
@@ -129,7 +129,7 @@ export default class Converter {
 	}
 
 	section(node, state) {
-		let section = {
+		const section = {
 			type: 'sec',
 			children: []
 		}
@@ -140,7 +140,7 @@ export default class Converter {
 	}
 
 	title(node, state) {
-		let title = {
+		const title = {
 			type: 'title',
 			children: []
 		}
@@ -151,7 +151,7 @@ export default class Converter {
 	}
 
 	paragraph(node, state) {
-		let para = {
+		const para = {
 			type: 'p',
 			children: []
 		}
@@ -163,7 +163,7 @@ export default class Converter {
 
 	@autobind
 	annotatedText(node, state) {
-		let type = getNodeType(node)
+		const type = getNodeType(node)
 
 		if (this._annotationNodes[type]) {
 			this._annotationNodes[type].call(this, node, state)
@@ -178,7 +178,7 @@ export default class Converter {
 
 		if ( ! data) return
 
-		let text = {
+		const text = {
 			type: 'text',
 			data: data,
 			children: []
@@ -188,7 +188,7 @@ export default class Converter {
 	}
 
 	italic(node, state) {
-		let italic = {
+		const italic = {
 			type: 'italic',
 			children: []
 		}
@@ -199,7 +199,7 @@ export default class Converter {
 	}
 
 	bold(node, state) {
-		let bold = {
+		const bold = {
 			type: 'bold',
 			children: []
 		}
@@ -210,7 +210,7 @@ export default class Converter {
 	}
 
 	code(node, state) {
-		let code = {
+		const code = {
 			type: 'code',
 			children: []
 		}
@@ -221,7 +221,7 @@ export default class Converter {
 	}
 
 	subscript(node, state) {
-		let subscript = {
+		const subscript = {
 			type: 'subscript',
 			children: []
 		}
@@ -232,7 +232,7 @@ export default class Converter {
 	}
 
 	superscript(node, state) {
-		let superscript = {
+		const superscript = {
 			type: 'superscript',
 			children: []
 		}
@@ -243,7 +243,7 @@ export default class Converter {
 	}
 
 	underline(node, state) {
-		let underline = {
+		const underline = {
 			type: 'underline',
 			children: []
 		}
@@ -254,14 +254,14 @@ export default class Converter {
 	}
 
 	xref(node, state) {
-		let type = Converter.xrefTypes[node.getAttribute('ref-type')] || 'cross_reference'
+		const type = Converter.xrefTypes[node.getAttribute('ref-type')] || 'cross_reference'
 
-		let xref = {
+		const xref = {
 			type: type,
 			children: []
 		}
 
-		let targetId = node.getAttribute('rid')
+		const targetId = node.getAttribute('rid')
 		if (targetId) xref.target = targetId
 
 		state.children.push(xref)
@@ -275,7 +275,7 @@ export default class Converter {
 		let linkType = node.getAttribute('ext-link-type')
 		if (linkType.toLowerCase() === 'doi') url = `http://dx.doi.org/${url}`
 
-		let extLink = {
+		const extLink = {
 			type: 'link',
 			url: normaliseUrl(url),
 			children: []
@@ -287,12 +287,12 @@ export default class Converter {
 	}
 
 	email(node, state) {
-		let email = {
+		const email = {
 			type: 'email',
 			children: []
 		}
 
-		let textNode = node.firstChild
+		const textNode = node.firstChild
 		if (textNode && textNode.nodeType === TEXT_NODE) {
 			email.url = `mailto:${textNode.data}`
 		}
