@@ -46,6 +46,19 @@ describe('Converter', () => {
 		expect(fn).to.throw(ConverterError, 'No <article> element')
 	})
 
+	it('takes exception to xml with no <body>', () => {
+		const converter = new Converter
+
+		const fn = () => converter.import(`
+			<article>
+				<article-meta></article-meta>
+				<foo>bar</foo>
+			</article>
+		`)
+
+		expect(fn).to.throw(ConverterError, 'No <body> element')
+	})
+
 	it('takes exception to xml with no <article-meta>', () => {
 		const converter = new Converter
 

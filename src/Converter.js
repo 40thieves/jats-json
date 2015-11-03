@@ -123,6 +123,8 @@ export default class Converter {
 	body(article, state) {
 		const node = article.getElementsByTagName('body').item(0)
 
+		if ( ! node) throw new ConverterError('No <body> element')
+
 		const body = {
 			type: 'body',
 			children: []
