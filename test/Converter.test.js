@@ -76,7 +76,8 @@ describe('Converter', () => {
 			type: 'root',
 			meta: [
 				{
-					type: 'article-meta'
+					type: 'article-meta',
+					children: []
 				}
 			],
 			article: [

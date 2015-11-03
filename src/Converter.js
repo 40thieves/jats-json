@@ -99,10 +99,59 @@ export default class Converter {
 		if ( ! node) throw new ConverterError('No <article-meta> element')
 
 		const meta = {
-			type: 'article-meta'
+			type: 'article-meta',
+			children: []
 		}
 
 		state.meta.push(meta)
+
+		this.contribGroup(node, meta)
+	}
+
+	contribGroup(articleMeta, state) {
+		const node = articleMeta.getElementsByTagName('contrib-group').item(0)
+
+		if ( ! node) return
+
+		const contribGroup = {
+			type: 'contrib-group',
+			contributors: []
+		}
+
+		state.children.push(contribGroup)
+
+		mapChildNodes(node, this.contrib, contribGroup)
+	}
+
+	@autobind
+	contrib(node, state) {
+		const type = getNodeType(node)
+
+		if (type != 'contrib') return
+
+		const contrib = {
+			type: 'contributor'
+		}
+
+		state.contributors.push(contrib)
+
+		this.contribName(node, contrib)
+
+		// mapChildNodes(name, this.contribName, contrib)
+	}
+
+	contribName(node, state) {
+		const name = node.getElementsByTagName('name').item(0)
+
+		if ( ! name) return
+
+		const surname = name.getElementsByTagName('surname').item(0)
+		const givenNames = name.getElementsByTagName('given-names').item(0)
+
+		state.name = {}
+
+		if (surname) state.name.surname = surname.childNodes.item(0).data
+		if (givenNames) state.name.givenNames = givenNames.childNodes.item(0).data
 	}
 
 	article(xml, state) {
