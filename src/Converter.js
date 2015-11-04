@@ -168,6 +168,7 @@ export default class Converter {
 
 		this.contribName(node, contrib)
 		this.contribType(node, contrib)
+		this.contribBio(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -198,6 +199,20 @@ export default class Converter {
 		if ( ! type) return
 
 		state.contributor_type = Converter.contribTypes[type]
+	}
+
+	contribBio(node, state) {
+		const bioEl = node.getElementsByTagName('bio').item(0)
+
+		if ( ! bioEl) return
+
+		const bio = {
+			children: []
+		}
+
+		state.bio = bio
+
+		mapChildNodes(bioEl, this.annotatedText, bio)
 	}
 
 	article(xml, state) {
