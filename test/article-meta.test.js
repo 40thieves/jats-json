@@ -228,6 +228,30 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses contributor deceased', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<contrib deceased="yes"></contrib>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const contrib = result.meta[0].children[0].contributors[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'contributor',
+				id: '',
+				name: '',
+				deceased: true
+			})
+		})
+
 	})
 
 })

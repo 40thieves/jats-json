@@ -170,6 +170,7 @@ export default class Converter {
 		this.contribType(node, contrib)
 		this.contribBio(node, contrib)
 		this.contribRole(node, contrib)
+		this.contribDeceased(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -225,6 +226,14 @@ export default class Converter {
 		if ( ! role) return
 
 		state.role = role.textContent
+	}
+
+	contribDeceased(node, state) {
+		const deceased = node.getAttribute('deceased')
+
+		if ( ! deceased || deceased != 'yes') return
+
+		state.deceased = true
 	}
 
 	article(xml, state) {
