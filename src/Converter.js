@@ -159,7 +159,8 @@ export default class Converter {
 		if (type != 'contrib') return
 
 		const contrib = {
-			type: 'contributor'
+			type: 'contributor',
+			name: ''
 		}
 
 		state.contributors.push(contrib)
@@ -173,13 +174,21 @@ export default class Converter {
 
 		if ( ! name) return
 
-		const surname = name.getElementsByTagName('surname').item(0)
-		const givenNames = name.getElementsByTagName('given-names').item(0)
+		const surnameEl = name.getElementsByTagName('surname').item(0)
+		const givenNamesEl = name.getElementsByTagName('given-names').item(0)
+		const suffixEl = name.getElementsByTagName('suffix').item(0)
 
-		state.name = {}
+		let names = []
 
-		if (surname) state.name.surname = surname.childNodes.item(0).data
-		if (givenNames) state.name.givenNames = givenNames.childNodes.item(0).data
+		if (givenNamesEl) names.push(givenNamesEl.textContent)
+		if (surnameEl) names.push(surnameEl.textContent)
+		
+		if (suffixEl) {
+			state.name = [names.join(' '), suffixEl.textContent].join(', ')
+		}
+		else {
+			state.name = names.join(' ');
+		}
 	}
 
 	contribType(node, state) {

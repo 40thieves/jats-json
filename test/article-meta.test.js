@@ -45,7 +45,8 @@ describe('Article Meta', () => {
 			const contrib = result.meta[0].children[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
-				type: 'contributor'
+				type: 'contributor',
+				name: ''
 			})
 		})
 
@@ -60,6 +61,7 @@ describe('Article Meta', () => {
 								<name>
 									<surname>Smith</surname>
 									<given-names>Ali</given-names>
+									<suffix>BSc</suffix>
 								</name>
 							</contrib>
 						</contrib-group>
@@ -72,10 +74,7 @@ describe('Article Meta', () => {
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
-				name: {
-					surname: 'Smith',
-					givenNames: 'Ali'
-				}
+				name: 'Ali Smith, BSc'
 			})
 		})
 
@@ -97,6 +96,7 @@ describe('Article Meta', () => {
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
+				name: '',
 				contributor_type: 'Author'
 			})
 		})
