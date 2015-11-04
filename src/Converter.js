@@ -71,8 +71,37 @@ export default class Converter {
 		'table': 'figure_reference',
 		'supplementary-material': 'figure_reference',
 		'other': 'figure_reference',
-		'list': 'definition_reference',
-	  }
+		'list': 'definition_reference'
+	}
+
+	static contribTypes = {
+		'author': 'Author',
+		'author non-byline': 'Author',
+		'autahor': 'Author',
+		'auther': 'Author',
+		'editor': 'Editor',
+		'guest-editor': 'Guest Editor',
+		'group-author': 'Group Author',
+		'collab': 'Collaborator',
+		'reviewed-by': 'Reviewer',
+		'nominated-by': 'Nominator',
+		'corresp': 'Corresponding Author',
+		'other': 'Other',
+		'assoc-editor': 'Associate Editor',
+		'associate editor': 'Associate Editor',
+		'series-editor': 'Series Editor',
+		'contributor': 'Contributor',
+		'chairman': 'Chairman',
+		'monographs-editor': 'Monographs Editor',
+		'contrib-author': 'Contributing Author',
+		'organizer': 'Organizer',
+		'chair': 'Chair',
+		'discussant': 'Discussant',
+		'presenter': 'Presenter',
+		'guest-issue-editor': 'Guest Issue Editor',
+		'participant': 'Participant',
+		'translator': 'Translator'
+	}
 
 	import(input) {
 		const xml = this.convertToXml(input)
@@ -136,8 +165,7 @@ export default class Converter {
 		state.contributors.push(contrib)
 
 		this.contribName(node, contrib)
-
-		// mapChildNodes(name, this.contribName, contrib)
+		this.contribType(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -152,6 +180,14 @@ export default class Converter {
 
 		if (surname) state.name.surname = surname.childNodes.item(0).data
 		if (givenNames) state.name.givenNames = givenNames.childNodes.item(0).data
+	}
+
+	contribType(node, state) {
+		const type = node.getAttribute('contrib-type')
+
+		if ( ! type) return
+
+		state.contributor_type = Converter.contribTypes[type]
 	}
 
 	article(xml, state) {
