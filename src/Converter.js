@@ -213,6 +213,9 @@ export default class Converter {
 		state.bio = bio
 
 		mapChildNodes(bioEl, this.annotatedText, bio)
+
+		const image = bioEl.getElementsByTagName('graphic').item(0)
+		if (image) state.image = image.getAttribute('xlink:href')
 	}
 
 	article(xml, state) {
