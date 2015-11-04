@@ -202,6 +202,32 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses contributor role', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<contrib>
+								<role>Reviewing editor</role>
+							</contrib>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const contrib = result.meta[0].children[0].contributors[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'contributor',
+				id: '',
+				name: '',
+				role: 'Reviewing editor'
+			})
+		})
+
 	})
 
 })

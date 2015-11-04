@@ -169,6 +169,7 @@ export default class Converter {
 		this.contribName(node, contrib)
 		this.contribType(node, contrib)
 		this.contribBio(node, contrib)
+		this.contribRole(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -216,6 +217,14 @@ export default class Converter {
 
 		const image = bioEl.getElementsByTagName('graphic').item(0)
 		if (image) state.image = image.getAttribute('xlink:href')
+	}
+
+	contribRole(node, state) {
+		const role = node.getElementsByTagName('role').item(0)
+
+		if ( ! role) return
+
+		state.role = role.textContent
 	}
 
 	article(xml, state) {
