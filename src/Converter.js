@@ -160,6 +160,7 @@ export default class Converter {
 
 		const contrib = {
 			type: 'contributor',
+			id: node.getAttribute('id'),
 			name: ''
 		}
 
