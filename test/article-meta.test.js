@@ -127,7 +127,7 @@ describe('Article Meta', () => {
 			})
 		})
 
-		it.only('parses contributor bio', () => {
+		it('parses contributor bio', () => {
 			const converter = new Converter
 
 			const result = converter.import(`
