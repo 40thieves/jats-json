@@ -103,6 +103,31 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses contributor collaborators', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<contrib>
+								<collab>National High Blood Pressure Education Program (US)</collab>
+							</contrib>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const contrib = result.meta[0].children[0].contributors[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'contributor',
+				id: '',
+				name: 'National High Blood Pressure Education Program (US)'
+			})
+		})
+
 		it('parses contributor type', () => {
 			const converter = new Converter
 

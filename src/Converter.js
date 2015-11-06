@@ -167,6 +167,7 @@ export default class Converter {
 		state.contributors.push(contrib)
 
 		this.contribName(node, contrib)
+		this.contribCollab(node, contrib)
 		this.contribType(node, contrib)
 		this.contribBio(node, contrib)
 		this.contribRole(node, contrib)
@@ -194,6 +195,14 @@ export default class Converter {
 		else {
 			state.name = names.join(' ');
 		}
+	}
+
+	contribCollab(node, state) {
+		const collab = node.getElementsByTagName('collab').item(0)
+
+		if ( ! collab) return
+
+		state.name = collab.textContent
 	}
 
 	contribType(node, state) {
