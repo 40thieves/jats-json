@@ -144,20 +144,26 @@ export default class Converter {
 
 		const contribGroup = {
 			type: 'contrib-group',
-			contributors: []
+			contributors: [],
+			affiliations: []
 		}
 
 		state.children.push(contribGroup)
 
-		mapChildNodes(node, this.contrib, contribGroup)
+		mapChildNodes(node, this.contribNode, contribGroup)
 	}
 
 	@autobind
-	contrib(node, state) {
+	contribNode(node, state) {
 		const type = getNodeType(node)
 
-		if (type != 'contrib') return
+		if (type == 'contrib')
+			this.contrib(node, state)
+		else if (type == 'aff')
+			this.affiliation(node, state)
+	}
 
+	contrib(node, state) {
 		const contrib = {
 			type: 'contributor',
 			id: node.getAttribute('id'),
@@ -253,6 +259,15 @@ export default class Converter {
 		if ( ! orcid) return
 
 		state.orcid = orcid.getAttribute('xlink:href')
+	}
+
+	affiliation(node, state) {
+		const contrib = {
+			type: 'affiliation',
+			id: node.getAttribute('id'),
+		}
+
+		state.affiliations.push(contrib)
 	}
 
 	article(xml, state) {

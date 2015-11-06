@@ -22,7 +22,8 @@ describe('Article Meta', () => {
 
 		expect(contribGroup).to.deep.equal({
 			type: 'contrib-group',
-			contributors: []
+			contributors: [],
+			affiliations: []
 		})
 	})
 
@@ -300,6 +301,32 @@ describe('Article Meta', () => {
 				id: '',
 				name: '',
 				orcid: 'http://orcid.org/0000-0002-7361-560X'
+			})
+		})
+
+	})
+
+	describe('Affiliations', () => {
+
+		it('extracts affiliations', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff></aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: ''
 			})
 		})
 
