@@ -252,6 +252,32 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses contributor orcid', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<contrib>
+								<uri content-type="orcid" xlink:href="http://orcid.org/0000-0002-7361-560X"/>
+							</contrib>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const contrib = result.meta[0].children[0].contributors[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'contributor',
+				id: '',
+				name: '',
+				orcid: 'http://orcid.org/0000-0002-7361-560X'
+			})
+		})
+
 	})
 
 })

@@ -171,6 +171,7 @@ export default class Converter {
 		this.contribBio(node, contrib)
 		this.contribRole(node, contrib)
 		this.contribDeceased(node, contrib)
+		this.contribOrcid(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -234,6 +235,15 @@ export default class Converter {
 		if ( ! deceased || deceased != 'yes') return
 
 		state.deceased = true
+	}
+
+	contribOrcid(node, state) {
+		const uris = node.getElementsByTagName('uri')
+		const orcid = Array.prototype.slice.call(uris).find(u => u.getAttribute('content-type') == 'orcid')
+
+		if ( ! orcid) return
+
+		state.orcid = orcid.getAttribute('xlink:href')
 	}
 
 	article(xml, state) {
