@@ -262,12 +262,35 @@ export default class Converter {
 	}
 
 	affiliation(node, state) {
-		const contrib = {
+		const affiliation = {
 			type: 'affiliation',
 			id: node.getAttribute('id'),
 		}
 
-		state.affiliations.push(contrib)
+		state.affiliations.push(affiliation)
+
+		this.affiliationLabel(node, affiliation)
+		this.affiliationDept(node, affiliation)
+	}
+
+	affiliationLabel(node, state) {
+		const label = node.getElementsByTagName('label').item(0)
+
+		if ( ! label) return
+
+		state.label = label.textContent
+	}
+
+	affiliationDept(node, state) {
+		const addrLine = node.getElementsByTagName('addr-line').item(0)
+		if ( ! addrLine) return
+		const namedContent = addrLine.getElementsByTagName('named-content')
+
+		const dept = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') == 'department')
+
+		if ( ! dept) return
+
+		state.department = dept.textContent
 	}
 
 	article(xml, state) {

@@ -330,6 +330,80 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses affiliation id', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff id="aff1"></aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: 'aff1'
+			})
+		})
+
+		it('parses affiliation label', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff>
+								<label>Foo</label>
+							</aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: '',
+				label: 'Foo'
+			})
+		})
+
+		it('parses affiliation department', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff>
+								<addr-line>
+									<named-content content-type="department">Department of Molecular and Cell Biology</named-content>
+								</addr-line>
+							</aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: '',
+				department: 'Department of Molecular and Cell Biology'
+			})
+		})
+
 	})
 
 })
