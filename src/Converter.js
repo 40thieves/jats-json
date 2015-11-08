@@ -179,6 +179,7 @@ export default class Converter {
 		this.contribRole(node, contrib)
 		this.contribDeceased(node, contrib)
 		this.contribOrcid(node, contrib)
+		this.contribAffiliations(node, contrib)
 	}
 
 	contribName(node, state) {
@@ -259,6 +260,18 @@ export default class Converter {
 		if ( ! orcid) return
 
 		state.orcid = orcid.getAttribute('xlink:href')
+	}
+
+	contribAffiliations(node, state) {
+		const xrefs = node.getElementsByTagName('xref')
+
+		const affiliationIds = Array.prototype.slice.call(xrefs)
+			.filter(xref => xref.getAttribute('ref-type') == 'aff')
+			.map(xref => xref.getAttribute('rid'))
+
+		if ( ! affiliationIds.length) return
+
+		state.affiliations = affiliationIds
 	}
 
 	affiliation(node, state) {

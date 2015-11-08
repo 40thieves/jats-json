@@ -304,6 +304,36 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses contributor affiliation ids', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<contrib>
+								<xref ref-type="aff" rid="aff1" />
+								<xref ref-type="aff" rid="aff2" />
+							</contrib>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const contrib = result.meta[0].children[0].contributors[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'contributor',
+				id: '',
+				name: '',
+				affiliations: [
+					'aff1',
+					'aff2'
+				]
+			})
+		})
+
 	})
 
 	describe('Affiliations', () => {
