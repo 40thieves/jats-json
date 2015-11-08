@@ -271,6 +271,7 @@ export default class Converter {
 
 		this.affiliationLabel(node, affiliation)
 		this.affiliationDept(node, affiliation)
+		this.affiliationCity(node, affiliation)
 	}
 
 	affiliationLabel(node, state) {
@@ -291,6 +292,18 @@ export default class Converter {
 		if ( ! dept) return
 
 		state.department = dept.textContent
+	}
+
+	affiliationCity(node, state) {
+		const addrLine = node.getElementsByTagName('addr-line').item(0)
+		if ( ! addrLine) return
+		const namedContent = addrLine.getElementsByTagName('named-content')
+
+		const city = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') == 'city')
+
+		if ( ! city) return
+
+		state.city = city.textContent
 	}
 
 	article(xml, state) {

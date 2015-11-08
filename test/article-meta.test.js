@@ -404,6 +404,33 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses affiliation city', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff>
+								<addr-line>
+									<named-content content-type="city">Berkeley</named-content>
+								</addr-line>
+							</aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: '',
+				city: 'Berkeley'
+			})
+		})
+
 	})
 
 })
