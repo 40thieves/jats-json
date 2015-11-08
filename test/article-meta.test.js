@@ -431,6 +431,31 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses affiliation institution', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff>
+								<institution>Department of Molecular and Cell Biology</institution>
+							</aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: '',
+				institution: 'Department of Molecular and Cell Biology'
+			})
+		})
+
 	})
 
 })

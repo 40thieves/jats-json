@@ -272,6 +272,7 @@ export default class Converter {
 		this.affiliationLabel(node, affiliation)
 		this.affiliationDept(node, affiliation)
 		this.affiliationCity(node, affiliation)
+		this.affiliationInstitution(node, affiliation)
 	}
 
 	affiliationLabel(node, state) {
@@ -304,6 +305,14 @@ export default class Converter {
 		if ( ! city) return
 
 		state.city = city.textContent
+	}
+
+	affiliationInstitution(node, state) {
+		const institution = node.getElementsByTagName('institution').item(0)
+
+		if ( ! institution) return
+
+		state.institution = institution.textContent
 	}
 
 	article(xml, state) {
