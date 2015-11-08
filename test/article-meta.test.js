@@ -431,6 +431,31 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses affiliation county', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<contrib-group>
+							<aff>
+								<country>United States</country>
+							</aff>
+						</contrib-group>
+					</article-meta>
+					<body></body>
+				</article>
+			`)
+
+			const affiliation = result.meta[0].children[0].affiliations[0]
+
+			expect(affiliation).to.deep.equal({
+				type: 'affiliation',
+				id: '',
+				country: 'United States'
+			})
+		})
+
 		it('parses affiliation institution', () => {
 			const converter = new Converter
 
