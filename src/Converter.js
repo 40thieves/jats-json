@@ -108,11 +108,9 @@ export default class Converter {
 
 		const initialState = {
 			type: 'root',
-			article: [],
-			meta: []
+			article: []
 		}
 
-		this.articleMeta(xml, initialState)
 		this.article(xml, initialState)
 
 		return initialState
@@ -120,6 +118,23 @@ export default class Converter {
 
 	convertToXml(input) {
 		return this.parser.parseFromString(input)
+	}
+
+	article(xml, state) {
+		const node = xml.getElementsByTagName('article').item(0)
+
+		if ( ! node) throw new ConverterError('No <article> element')
+
+		const article = {
+			type: 'article',
+			meta: [],
+			body: []
+		}
+
+		state.article.push(article)
+
+		this.articleMeta(xml, article)
+		this.body(node, article)
 	}
 
 	articleMeta(xml, state) {
@@ -337,21 +352,6 @@ export default class Converter {
 		state.institution = institution.textContent
 	}
 
-	article(xml, state) {
-		const node = xml.getElementsByTagName('article').item(0)
-
-		if ( ! node) throw new ConverterError('No <article> element')
-
-		const article = {
-			type: 'article',
-			children: []
-		}
-
-		state.article.push(article)
-
-		this.body(node, article)
-	}
-
 	body(article, state) {
 		const node = article.getElementsByTagName('body').item(0)
 
@@ -362,7 +362,7 @@ export default class Converter {
 			children: []
 		}
 
-		state.children.push(body)
+		state.body.push(body)
 
 		mapChildNodes(node, this.bodyNode, body)
 	}

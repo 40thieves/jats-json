@@ -74,16 +74,10 @@ describe('Converter', () => {
 
 		expect(result).to.deep.equal({
 			type: 'root',
-			meta: [
-				{
-					type: 'article-meta',
-					children: []
-				}
-			],
 			article: [
 				{
 					type: 'article',
-					children: [
+					body: [
 						{
 							type: 'body',
 							children: [
@@ -113,6 +107,12 @@ describe('Converter', () => {
 									]
 								}
 							]
+						}
+					],
+					meta: [
+						{
+							type: 'article-meta',
+							children: []
 						}
 					]
 				}

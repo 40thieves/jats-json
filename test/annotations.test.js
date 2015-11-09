@@ -19,7 +19,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -53,7 +53,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -87,7 +87,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -121,7 +121,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -155,7 +155,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -189,7 +189,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -225,7 +225,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -257,7 +257,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -288,7 +288,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -326,7 +326,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -378,7 +378,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
 
 		expect(paragraph.url).to.equal('http://example.com/x.pdf')
 	})
@@ -398,7 +398,7 @@ describe('Annotations', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
+		const paragraph = result.article[0].body[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
 
 		expect(paragraph.url).to.equal('http://dx.doi.org/10.7554/eLife.00299.003')
 	})
