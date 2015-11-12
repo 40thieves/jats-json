@@ -23,7 +23,5 @@ export function mapNodes(nodes, cb, state) {
 }
 
 export function mapChildNodes(node, cb, state) {
-	Array.prototype.slice.call(node.childNodes).map(node => {
-		return cb(node, state)
-	})
+	mapNodes(node.childNodes, cb, state)
 }
