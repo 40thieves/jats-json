@@ -128,13 +128,15 @@ export default class Converter {
 		const article = {
 			type: 'article',
 			meta: [],
-			body: []
+			body: [],
+			back: []
 		}
 
 		state.article.push(article)
 
-		this.articleMeta(xml, article)
+		this.articleMeta(node, article)
 		this.body(node, article)
+		this.back(node, article)
 	}
 
 	articleMeta(xml, state) {
@@ -548,6 +550,22 @@ export default class Converter {
 		state.children.push(email)
 
 		mapChildNodes(node, this.annotatedText, email)
+	}
+
+	back(node, state) {
+		const backEl = node.getElementsByTagName('back').item(0)
+
+		if ( ! node) throw new ConverterError('No <back> element')
+
+		const back = {
+			type: 'back'
+		}
+
+		state.back.push(back)
+	}
+
+	footnoteGroup(node, state) {
+
 	}
 
 }

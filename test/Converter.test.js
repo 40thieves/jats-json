@@ -114,6 +114,11 @@ describe('Converter', () => {
 							type: 'article-meta',
 							contributorGroups: []
 						}
+					],
+					back: [
+						{
+							type: 'back'
+						}
 					]
 				}
 			]
