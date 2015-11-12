@@ -18,7 +18,7 @@ describe('Article Meta', () => {
 			</article>
 		`)
 
-		const contribGroup = result.article[0].meta[0].children[0]
+		const contribGroup = result.article[0].meta[0].contributorGroups[0]
 
 		expect(contribGroup).to.deep.equal({
 			type: 'contrib-group',
@@ -43,7 +43,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -66,7 +66,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -95,7 +95,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -120,7 +120,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -143,7 +143,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -171,7 +171,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -217,7 +217,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -244,7 +244,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -268,7 +268,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -294,7 +294,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -321,7 +321,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0].children[0].contributors[0]
+			const contrib = result.article[0].meta[0].contributorGroups[0].contributors[0]
 
 			expect(contrib).to.deep.equal({
 				type: 'contributor',
@@ -352,7 +352,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -374,7 +374,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -398,7 +398,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -425,7 +425,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -452,7 +452,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -477,7 +477,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',
@@ -502,7 +502,7 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const affiliation = result.article[0].meta[0].children[0].affiliations[0]
+			const affiliation = result.article[0].meta[0].contributorGroups[0].affiliations[0]
 
 			expect(affiliation).to.deep.equal({
 				type: 'affiliation',

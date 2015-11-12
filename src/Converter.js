@@ -144,7 +144,7 @@ export default class Converter {
 
 		const meta = {
 			type: 'article-meta',
-			children: []
+			contributorGroups: []
 		}
 
 		state.meta.push(meta)
@@ -163,7 +163,7 @@ export default class Converter {
 			affiliations: []
 		}
 
-		state.children.push(contribGroup)
+		state.contributorGroups.push(contribGroup)
 
 		mapChildNodes(node, this.contribNode, contribGroup)
 	}

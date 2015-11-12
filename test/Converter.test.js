@@ -112,7 +112,7 @@ describe('Converter', () => {
 					meta: [
 						{
 							type: 'article-meta',
-							children: []
+							contributorGroups: []
 						}
 					]
 				}
