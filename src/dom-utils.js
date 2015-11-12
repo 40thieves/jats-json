@@ -16,6 +16,12 @@ export function getNodeType(node) {
 	}
 }
 
+export function mapNodes(nodes, cb, state) {
+	Array.prototype.slice.call(nodes).map(node => {
+		return cb(node, state)
+	})
+}
+
 export function mapChildNodes(node, cb, state) {
 	Array.prototype.slice.call(node.childNodes).map(node => {
 		return cb(node, state)

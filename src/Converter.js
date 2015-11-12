@@ -2,7 +2,7 @@ import { DOMParser } from 'xmldom'
 import normaliseUrl from 'normalize-url'
 
 import { isString, autobind } from './utils'
-import { getNodeType, mapChildNodes, TEXT_NODE } from './dom-utils'
+import { getNodeType, mapNodes, mapChildNodes, TEXT_NODE } from './dom-utils'
 import ConverterError from './ConverterError'
 
 export default class Converter {
@@ -558,14 +558,28 @@ export default class Converter {
 		if ( ! node) throw new ConverterError('No <back> element')
 
 		const back = {
-			type: 'back'
+			type: 'back',
+			footnoteGroups: []
 		}
 
 		state.back.push(back)
+
+		this.footnoteGroups(node, back)
+	}
+
+	footnoteGroups(node, state) {
+		const nodes = node.getElementsByTagName('fn-group')
+
+		mapNodes(nodes, this.footnoteGroup, state)
 	}
 
 	footnoteGroup(node, state) {
+		const footnoteGroup = {
+			type: 'footnote-group',
+			footnotes: []
+		}
 
+		state.footnoteGroups.push(footnoteGroup)
 	}
 
 }

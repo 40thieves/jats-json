@@ -117,7 +117,8 @@ describe('Converter', () => {
 					],
 					back: [
 						{
-							type: 'back'
+							type: 'back',
+							footnoteGroups: []
 						}
 					]
 				}
