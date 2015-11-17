@@ -1,7 +1,7 @@
 import { DOMParser } from 'xmldom'
 import normaliseUrl from 'normalize-url'
 
-import { isString, autobind } from './utils'
+import { autobind } from './utils'
 import { getNodeType, mapNodes, mapChildNodes, TEXT_NODE } from './dom-utils'
 import ConverterError from './ConverterError'
 
@@ -174,10 +174,12 @@ export default class Converter {
 	contribNode(node, state) {
 		const type = getNodeType(node)
 
-		if (type == 'contrib')
+		if (type === 'contrib') {
 			this.contrib(node, state)
-		else if (type == 'aff')
+		}
+		else if (type === 'aff') {
 			this.affiliation(node, state)
+		}
 	}
 
 	contrib(node, state) {
@@ -208,16 +210,16 @@ export default class Converter {
 		const givenNamesEl = name.getElementsByTagName('given-names').item(0)
 		const suffixEl = name.getElementsByTagName('suffix').item(0)
 
-		let names = []
+		const names = []
 
 		if (givenNamesEl) names.push(givenNamesEl.textContent)
 		if (surnameEl) names.push(surnameEl.textContent)
-		
+
 		if (suffixEl) {
 			state.name = [names.join(' '), suffixEl.textContent].join(', ')
 		}
 		else {
-			state.name = names.join(' ');
+			state.name = names.join(' ')
 		}
 	}
 
@@ -265,14 +267,14 @@ export default class Converter {
 	contribDeceased(node, state) {
 		const deceased = node.getAttribute('deceased')
 
-		if ( ! deceased || deceased != 'yes') return
+		if ( ! deceased || deceased !== 'yes') return
 
 		state.deceased = true
 	}
 
 	contribOrcid(node, state) {
 		const uris = node.getElementsByTagName('uri')
-		const orcid = Array.prototype.slice.call(uris).find(u => u.getAttribute('content-type') == 'orcid')
+		const orcid = Array.prototype.slice.call(uris).find(u => u.getAttribute('content-type') === 'orcid')
 
 		if ( ! orcid) return
 
@@ -283,7 +285,7 @@ export default class Converter {
 		const xrefs = node.getElementsByTagName('xref')
 
 		const affiliationIds = Array.prototype.slice.call(xrefs)
-			.filter(xref => xref.getAttribute('ref-type') == 'aff')
+			.filter(xref => xref.getAttribute('ref-type') === 'aff')
 			.map(xref => xref.getAttribute('rid'))
 
 		if ( ! affiliationIds.length) return
@@ -294,7 +296,7 @@ export default class Converter {
 	affiliation(node, state) {
 		const affiliation = {
 			type: 'affiliation',
-			id: node.getAttribute('id'),
+			id: node.getAttribute('id')
 		}
 
 		state.affiliations.push(affiliation)
@@ -319,7 +321,7 @@ export default class Converter {
 		if ( ! addrLine) return
 		const namedContent = addrLine.getElementsByTagName('named-content')
 
-		const dept = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') == 'department')
+		const dept = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') === 'department')
 
 		if ( ! dept) return
 
@@ -331,7 +333,7 @@ export default class Converter {
 		if ( ! addrLine) return
 		const namedContent = addrLine.getElementsByTagName('named-content')
 
-		const city = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') == 'city')
+		const city = Array.prototype.slice.call(namedContent).find(el => el.getAttribute('content-type') === 'city')
 
 		if ( ! city) return
 
@@ -522,7 +524,7 @@ export default class Converter {
 	extLink(node, state) {
 		let url = node.getAttribute('xlink:href')
 
-		let linkType = node.getAttribute('ext-link-type')
+		const linkType = node.getAttribute('ext-link-type')
 		if (linkType.toLowerCase() === 'doi') url = `http://dx.doi.org/${url}`
 
 		const extLink = {

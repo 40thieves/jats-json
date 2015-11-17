@@ -1,5 +1,5 @@
-export const TEXT_NODE = 3;
-const COMMENT_NODE = 8;
+export const TEXT_NODE = 3
+const COMMENT_NODE = 8
 
 export function getNodeType(node) {
 	if (node.nodeType === TEXT_NODE) {

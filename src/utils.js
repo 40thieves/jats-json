@@ -3,20 +3,20 @@ export function isString(obj) {
 }
 
 export function autobind(target, key, descriptor) {
-	var fn = descriptor.value;
+	const fn = descriptor.value
 
-	delete descriptor.value;
-	delete descriptor.writable;
+	delete descriptor.value
+	delete descriptor.writable
 
-	descriptor.get = function () {
-		var bound = fn.bind(this);
+	descriptor.get = function() {
+		const bound = fn.bind(this)
 
 		Object.defineProperty(this, key, {
 			configurable: true,
 			writable: true,
 			value: bound
-		});
+		})
 
-		return bound;
-	};
+		return bound
+	}
 }
