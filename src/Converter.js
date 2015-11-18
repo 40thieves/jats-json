@@ -11,6 +11,7 @@ export default class Converter {
 		this.parser = new DOMParser()
 		this._bodyNodes = this.initBodyNodes()
 		this._annotationNodes = this.initAnnotationNodes()
+		this._footnoteNodes = this.initFootnoteNodes()
 	}
 
 	initBodyNodes() {
@@ -61,6 +62,17 @@ export default class Converter {
 			},
 			'email': (node, state) => {
 				this.email(node, state)
+			}
+		}
+	}
+
+	initFootnoteNodes() {
+		return {
+			'title': (node, state) => {
+				this.footnoteTitle(node, state)
+			},
+			'fn': (node, state) => {
+				this.footnote(node, state)
 			}
 		}
 	}
@@ -575,16 +587,41 @@ export default class Converter {
 		mapNodes(nodes, this.footnoteGroup, state)
 	}
 
+	@autobind
 	footnoteGroup(node, state) {
 		const footnoteGroup = {
 			type: 'footnote-group',
 			footnotes: []
 		}
 
-		const title = node.getElementsByTagName('title').item(0)
-		if (title) footnoteGroup.title = title.textContent
-
 		state.footnoteGroups.push(footnoteGroup)
+
+		mapChildNodes(node, this.footnotes, footnoteGroup)
+	}
+
+	@autobind
+	footnotes(node, state) {
+		const type = getNodeType(node)
+
+		if (this._footnoteNodes[type]) {
+			this._footnoteNodes[type].call(this, node, state)
+		}
+	}
+
+	footnoteTitle(node, state) {
+		const title = node.firstChild
+
+		if ( ! title) return
+
+		state.title = title.textContent
+	}
+
+	footnote(node, state) {
+		const footnote = {
+			type: 'footnote'
+		}
+
+		state.footnotes.push(footnote)
 	}
 
 }

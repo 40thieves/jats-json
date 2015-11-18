@@ -51,4 +51,31 @@ describe('Back', () => {
 		})
 	})
 
+	it('extracts footnotes', () => {
+		const converter = new Converter
+
+		const result = converter.import(`
+			<article>
+				<article-meta></article-meta>
+				<body></body>
+				<back>
+					<fn-group>
+						<fn></fn>
+					</fn-group>
+				</back>
+			</article>
+		`)
+
+		const footnoteGroup = result.article[0].back[0].footnoteGroups[0]
+
+		expect(footnoteGroup).to.deep.equal({
+			type: 'footnote-group',
+			footnotes: [
+				{
+					type: 'footnote'
+				}
+			]
+		})
+	})
+
 })
