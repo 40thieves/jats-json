@@ -274,7 +274,6 @@ describe('Annotations', () => {
 		])
 	})
 
-	
 	it('parses uris', () => {
 		const converter = new Converter
 

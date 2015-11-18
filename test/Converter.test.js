@@ -124,155 +124,155 @@ describe('Converter', () => {
 				}
 			]
 		})
+	})
 
-		it('parses multiple annotations in a paragraph', () => {
-			const converter = new Converter
+	it('parses multiple annotations in a paragraph', () => {
+		const converter = new Converter
 
-			const result = converter.import(`
-				<article>
-					<body>
-						<sec>
-							<title>Title with <bold>styling</bold></title>
-							<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
-							Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec 
-							vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio 
-							lectus eleifend <ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf" 
-							xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
-						</sec>
-					</body>
-				</article>`)
+		const result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<title>Title with <bold>styling</bold></title>
+						<p>Lorem <italic>ipsum</italic> dolor sit amet, consectetur <xref ref-type="fig" rid="fig1">
+						Figure 1</xref> adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec
+						 vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio
+						 lectus eleifend <ext-link ext-link-type="uri" xlink:href="http://example.com/x.pdf"
+						 xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
+					</sec>
+				</body>
+			</article>`)
 
-			const paragraph = result.article[0].children[0].children[0].children
+		const paragraph = result.article[0].children[0].children[0].children
 
-			expect(paragraph).to.deep.equal([
-				{
-					type: 'title',
-					children: [
-						{
-							type: 'text',
-							data: 'Title with ',
-							children: []
-						},
-						{
-							type: 'bold',
-							children: [
-								{
-									type: 'text',
-									data: 'styling',
-									children: []
-								}
-							]
-						}
-					]
-				},
-				{
-					type: 'p',
-					children: [
-						{
-							type: 'text',
-							data: 'Lorem ',
-							children: []
-						},
-						{
-							type: 'italic',
-							children: [
-								{
-									type: 'text',
-									data: 'ipsum',
-									children: []
-								}
-							]
-						},
-						{
-							type: 'text',
-							data: ' dolor sit amet, consectetur ',
-							children: []
-						},
-						{
-							type: 'figure_reference',
-							target: 'fig1',
-							children: [
-								{
-									type: 'text',
-									data: 'Figure 1',
-									children: []
-								}
-							]
-						},
-						{
-							type: 'text',
-							data: ' adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio lectus eleifend ',
-							children: []
-						},
-						{
-							type: 'ext-link',
-							url: 'http://example.com/x.pdf',
-							children: [
-								{
-									type: 'text',
-									data: 'felis',
-									children: []
-								}
-							]
-						},
-						{
-							type: 'text',
-							data: '.',
-							children: []
-						}
-					]
-				}
-			])
-		})
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'title',
+				children: [
+					{
+						type: 'text',
+						data: 'Title with ',
+						children: []
+					},
+					{
+						type: 'bold',
+						children: [
+							{
+								type: 'text',
+								data: 'styling',
+								children: []
+							}
+						]
+					}
+				]
+			},
+			{
+				type: 'p',
+				children: [
+					{
+						type: 'text',
+						data: 'Lorem ',
+						children: []
+					},
+					{
+						type: 'italic',
+						children: [
+							{
+								type: 'text',
+								data: 'ipsum',
+								children: []
+							}
+						]
+					},
+					{
+						type: 'text',
+						data: ' dolor sit amet, consectetur ',
+						children: []
+					},
+					{
+						type: 'figure_reference',
+						target: 'fig1',
+						children: [
+							{
+								type: 'text',
+								data: 'Figure 1',
+								children: []
+							}
+						]
+					},
+					{
+						type: 'text',
+						data: ' adipiscing elit. Cras vel accumsan lectus, id hendrerit magna. Donec vehicula dui quis ipsum tempor tincidunt. Quisque adipiscing, nibh at pulvinar feugiat, odio lectus eleifend ',
+						children: []
+					},
+					{
+						type: 'ext-link',
+						url: 'http://example.com/x.pdf',
+						children: [
+							{
+								type: 'text',
+								data: 'felis',
+								children: []
+							}
+						]
+					},
+					{
+						type: 'text',
+						data: '.',
+						children: []
+					}
+				]
+			}
+		])
+	})
 
-		it('parses nested annotated text', () => {
-			const converter = new Converter
+	it('parses nested annotated text', () => {
+		const converter = new Converter
 
-			const result = converter.import(`
-				<article>
-					<body>
-						<sec>
-							<p>
-								Text <bold>with <italic>styling</italic></bold>
-							</p>
-						</sec>
-					</body>
-				</article>`)
+		const result = converter.import(`
+			<article>
+				<body>
+					<sec>
+						<p>
+							Text <bold>with <italic>styling</italic></bold>
+						</p>
+					</sec>
+				</body>
+			</article>`)
 
-			const paragraph = result.article[0].children[0].children[0].children // Skip past article/body/sec stuff
-			expect(paragraph).to.deep.equal([
-				{
-					type: 'p',
-					children: [
-						{
-							type: 'text',
-							data: 'Text ',
-							children: []
-						},
-						{
-							type: 'bold',
-							children: [
-								{
-									type: 'text',
-									data: 'with ',
-									children: []
-								},
-								{
-									type: 'italic',
-									children: [
-										{
-											type: 'text',
-											data: 'styling',
-											children: []
-										}
-									]
-								}
-							]
-						}
-					]
-				}
-			])
-		})
+		const paragraph = result.article[0].children[0].children[0].children // Skip past article/body/sec stuff
+		expect(paragraph).to.deep.equal([
+			{
+				type: 'p',
+				children: [
+					{
+						type: 'text',
+						data: 'Text ',
+						children: []
+					},
+					{
+						type: 'bold',
+						children: [
+							{
+								type: 'text',
+								data: 'with ',
+								children: []
+							},
+							{
+								type: 'italic',
+								children: [
+									{
+										type: 'text',
+										data: 'styling',
+										children: []
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		])
 	})
 
 })
