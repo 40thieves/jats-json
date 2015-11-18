@@ -557,7 +557,7 @@ export default class Converter {
 	back(node, state) {
 		const backEl = node.getElementsByTagName('back').item(0)
 
-		if ( ! node) throw new ConverterError('No <back> element')
+		if ( ! backEl) throw new ConverterError('No <back> element')
 
 		const back = {
 			type: 'back',
@@ -566,7 +566,7 @@ export default class Converter {
 
 		state.back.push(back)
 
-		this.footnoteGroups(node, back)
+		this.footnoteGroups(backEl, back)
 	}
 
 	footnoteGroups(node, state) {

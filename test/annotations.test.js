@@ -17,6 +17,7 @@ describe('Annotations', () => {
 						<p>Foo <italic>Bar</italic></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -51,6 +52,7 @@ describe('Annotations', () => {
 						<p>Foo <bold>Bar</bold></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -85,6 +87,7 @@ describe('Annotations', () => {
 						<p>Foo <monospace>Bar</monospace></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -119,6 +122,7 @@ describe('Annotations', () => {
 						<p>Foo <sub>Bar</sub></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -153,6 +157,7 @@ describe('Annotations', () => {
 						<p>Foo <sup>Bar</sup></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -187,6 +192,7 @@ describe('Annotations', () => {
 						<p>Foo <underline>Bar</underline></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -223,6 +229,7 @@ describe('Annotations', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -255,6 +262,7 @@ describe('Annotations', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -285,6 +293,7 @@ describe('Annotations', () => {
 						<p>Foo <uri xlink:href="http://example.com/x.pdf">Bar</uri></p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -323,6 +332,7 @@ describe('Annotations', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children // Skip past article/body/sec/p stuff
@@ -375,6 +385,7 @@ describe('Annotations', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff
@@ -395,6 +406,7 @@ describe('Annotations', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children[0].children[0] // Skip past article/body/sec/p stuff

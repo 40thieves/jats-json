@@ -14,6 +14,7 @@ const SIMPLE_XML_STRING = `
 				<p>Lorem ipsum</p>
 			</sec>
 		</body>
+		<back></back>
 	</article>`
 
 describe('Converter', () => {
@@ -142,6 +143,7 @@ describe('Converter', () => {
 						 xmlns:xlink="http://www.w3.org/1999/xlink">felis</ext-link>.</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children
@@ -240,6 +242,7 @@ describe('Converter', () => {
 						</p>
 					</sec>
 				</body>
+				<back></back>
 			</article>`)
 
 		const paragraph = result.article[0].body[0].children[0].children // Skip past article/body/sec stuff

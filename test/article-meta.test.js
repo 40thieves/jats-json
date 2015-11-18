@@ -15,6 +15,7 @@ describe('Article Meta', () => {
 					<contrib-group></contrib-group>
 				</article-meta>
 				<body></body>
+				<back></back>
 			</article>
 		`)
 
@@ -40,6 +41,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -63,6 +65,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -92,6 +95,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -117,6 +121,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -140,6 +145,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -168,6 +174,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -214,6 +221,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -241,6 +249,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -265,6 +274,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -291,6 +301,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -318,6 +329,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -349,6 +361,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -371,6 +384,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -395,6 +409,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -422,6 +437,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -449,6 +465,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -474,6 +491,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 
@@ -499,6 +517,7 @@ describe('Article Meta', () => {
 						</contrib-group>
 					</article-meta>
 					<body></body>
+					<back></back>
 				</article>
 			`)
 

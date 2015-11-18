@@ -11,10 +11,11 @@ describe('Back', () => {
 
 		const result = converter.import(`
 			<article>
-				<article-meta>
-					<fn-group></fn-group>
-				</article-meta>
+				<article-meta></article-meta>
 				<body></body>
+				<back>
+					<fn-group></fn-group>
+				</back>
 			</article>
 		`)
 
