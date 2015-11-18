@@ -581,6 +581,9 @@ export default class Converter {
 			footnotes: []
 		}
 
+		const title = node.getElementsByTagName('title').item(0)
+		if (title) footnoteGroup.title = title.textContent
+
 		state.footnoteGroups.push(footnoteGroup)
 	}
 
