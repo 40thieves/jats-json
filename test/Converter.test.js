@@ -131,6 +131,7 @@ describe('Converter', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<title>Title with <bold>styling</bold></title>
@@ -143,7 +144,7 @@ describe('Converter', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children
+		const paragraph = result.article[0].body[0].children[0].children
 
 		expect(paragraph).to.deep.equal([
 			{
@@ -206,7 +207,7 @@ describe('Converter', () => {
 						children: []
 					},
 					{
-						type: 'ext-link',
+						type: 'link',
 						url: 'http://example.com/x.pdf',
 						children: [
 							{
@@ -231,6 +232,7 @@ describe('Converter', () => {
 
 		const result = converter.import(`
 			<article>
+				<article-meta></article-meta>
 				<body>
 					<sec>
 						<p>
@@ -240,7 +242,7 @@ describe('Converter', () => {
 				</body>
 			</article>`)
 
-		const paragraph = result.article[0].children[0].children[0].children // Skip past article/body/sec stuff
+		const paragraph = result.article[0].body[0].children[0].children // Skip past article/body/sec stuff
 		expect(paragraph).to.deep.equal([
 			{
 				type: 'p',
