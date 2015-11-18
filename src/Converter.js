@@ -11,44 +11,6 @@ export default class Converter {
 		this.parser = new DOMParser()
 		this._bodyNodes = this.initBodyNodes()
 		this._annotationNodes = this.initAnnotationNodes()
-
-		this.xrefTypes = {
-			'bibr': 'citation_reference',
-			'fig': 'figure_reference',
-			'table': 'figure_reference',
-			'supplementary-material': 'figure_reference',
-			'other': 'figure_reference',
-			'list': 'definition_reference'
-		}
-
-		this.contribTypes = {
-			'author': 'Author',
-			'author non-byline': 'Author',
-			'autahor': 'Author',
-			'auther': 'Author',
-			'editor': 'Editor',
-			'guest-editor': 'Guest Editor',
-			'group-author': 'Group Author',
-			'collab': 'Collaborator',
-			'reviewed-by': 'Reviewer',
-			'nominated-by': 'Nominator',
-			'corresp': 'Corresponding Author',
-			'other': 'Other',
-			'assoc-editor': 'Associate Editor',
-			'associate editor': 'Associate Editor',
-			'series-editor': 'Series Editor',
-			'contributor': 'Contributor',
-			'chairman': 'Chairman',
-			'monographs-editor': 'Monographs Editor',
-			'contrib-author': 'Contributing Author',
-			'organizer': 'Organizer',
-			'chair': 'Chair',
-			'discussant': 'Discussant',
-			'presenter': 'Presenter',
-			'guest-issue-editor': 'Guest Issue Editor',
-			'participant': 'Participant',
-			'translator': 'Translator'
-		}
 	}
 
 	initBodyNodes() {
@@ -101,6 +63,44 @@ export default class Converter {
 				this.email(node, state)
 			}
 		}
+	}
+
+	static xrefTypes = {
+		'bibr': 'citation_reference',
+		'fig': 'figure_reference',
+		'table': 'figure_reference',
+		'supplementary-material': 'figure_reference',
+		'other': 'figure_reference',
+		'list': 'definition_reference'
+	}
+
+	static contribTypes = {
+		'author': 'Author',
+		'author non-byline': 'Author',
+		'autahor': 'Author',
+		'auther': 'Author',
+		'editor': 'Editor',
+		'guest-editor': 'Guest Editor',
+		'group-author': 'Group Author',
+		'collab': 'Collaborator',
+		'reviewed-by': 'Reviewer',
+		'nominated-by': 'Nominator',
+		'corresp': 'Corresponding Author',
+		'other': 'Other',
+		'assoc-editor': 'Associate Editor',
+		'associate editor': 'Associate Editor',
+		'series-editor': 'Series Editor',
+		'contributor': 'Contributor',
+		'chairman': 'Chairman',
+		'monographs-editor': 'Monographs Editor',
+		'contrib-author': 'Contributing Author',
+		'organizer': 'Organizer',
+		'chair': 'Chair',
+		'discussant': 'Discussant',
+		'presenter': 'Presenter',
+		'guest-issue-editor': 'Guest Issue Editor',
+		'participant': 'Participant',
+		'translator': 'Translator'
 	}
 
 	import(input) {
@@ -236,7 +236,7 @@ export default class Converter {
 
 		if ( ! type) return
 
-		state.contributor_type = this.contribTypes[type]
+		state.contributor_type = Converter.contribTypes[type]
 	}
 
 	contribBio(node, state) {
@@ -506,7 +506,7 @@ export default class Converter {
 	}
 
 	xref(node, state) {
-		const type = this.xrefTypes[node.getAttribute('ref-type')] || 'cross_reference'
+		const type = Converter.xrefTypes[node.getAttribute('ref-type')] || 'cross_reference'
 
 		const xref = {
 			type: type,
