@@ -79,7 +79,7 @@ describe('Back', () => {
 		})
 	})
 
-	it('parses contributor footnote type', () => {
+	it('parses footnote type', () => {
 		const converter = new Converter
 
 		const result = converter.import(`
@@ -89,18 +89,32 @@ describe('Back', () => {
 				<back>
 					<fn-group>
 						<fn fn-type="con"></fn>
+						<fn fn-type="conflict"></fn>
+						<fn fn-type="present-address"></fn>
 					</fn-group>
 				</back>
 			</article>
 		`)
 
-		const footnote = result.article[0].back[0].footnoteGroups[0].footnotes[0]
+		const footnote = result.article[0].back[0].footnoteGroups[0].footnotes
 
-		expect(footnote).to.deep.equal({
-			type: 'footnote',
-			footnoteType: 'contributor',
-			children: []
-		})
+		expect(footnote).to.deep.equal([
+			{
+				type: 'footnote',
+				footnoteType: 'contributor',
+				children: []
+			},
+			{
+				type: 'footnote',
+				footnoteType: 'conflict',
+				children: []
+			},
+			{
+				type: 'footnote',
+				footnoteType: 'present-address',
+				children: []
+			}
+		])
 	})
 
 	it('parses contributor footnote contribution', () => {

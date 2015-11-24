@@ -628,6 +628,14 @@ export default class Converter {
 			case 'con':
 				footnote.footnoteType = 'contributor'
 				break
+
+			case 'conflict':
+				footnote.footnoteType = 'conflict'
+				break
+
+			case 'present-address':
+				footnote.footnoteType = 'present-address'
+				break
 		}
 
 		state.footnotes.push(footnote)
