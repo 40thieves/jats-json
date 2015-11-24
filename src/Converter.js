@@ -618,10 +618,21 @@ export default class Converter {
 
 	footnote(node, state) {
 		const footnote = {
-			type: 'footnote'
+			type: 'footnote',
+			children: []
+		}
+
+		const type = node.getAttribute('fn-type')
+
+		switch (type) {
+			case 'con':
+				footnote.footnoteType = 'contributor'
+				break
 		}
 
 		state.footnotes.push(footnote)
+
+		this.paragraph(node.getElementsByTagName('p').item(0), footnote)
 	}
 
 }
