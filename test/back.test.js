@@ -96,9 +96,9 @@ describe('Back', () => {
 			</article>
 		`)
 
-		const footnote = result.article[0].back[0].footnoteGroups[0].footnotes
+		const footnotes = result.article[0].back[0].footnoteGroups[0].footnotes
 
-		expect(footnote).to.deep.equal([
+		expect(footnotes).to.deep.equal([
 			{
 				type: 'footnote',
 				footnoteType: 'contributor',
