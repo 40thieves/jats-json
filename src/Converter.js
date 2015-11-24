@@ -632,7 +632,11 @@ export default class Converter {
 
 		state.footnotes.push(footnote)
 
-		this.paragraph(node.getElementsByTagName('p').item(0), footnote)
+		const footnoteDescription = node.getElementsByTagName('p').item(0)
+
+		if ( ! footnoteDescription) return
+
+		this.paragraph(footnoteDescription, footnote)
 	}
 
 }
