@@ -117,7 +117,7 @@ describe('Back', () => {
 		])
 	})
 
-	it('parses contributor footnote contribution', () => {
+	it('parses footnote text', () => {
 		const converter = new Converter
 
 		const result = converter.import(`
