@@ -158,12 +158,14 @@ export default class Converter {
 
 		const meta = {
 			type: 'article-meta',
-			contributorGroups: []
+			contributorGroups: [],
+			fundingGroups: []
 		}
 
 		state.meta.push(meta)
 
 		this.contribGroup(node, meta)
+		this.fundingGroup(node, meta)
 	}
 
 	contribGroup(articleMeta, state) {
@@ -366,6 +368,31 @@ export default class Converter {
 		if ( ! institution) return
 
 		state.institution = institution.textContent
+	}
+
+	fundingGroup(articleMeta, state) {
+		const node = articleMeta.getElementsByTagName('funding-group').item(0)
+
+		if ( ! node) return
+
+		mapChildNodes(node, this.fundingGroupNode, state.fundingGroups)
+	}
+
+	@autobind
+	fundingGroupNode(node, state) {
+		const type = getNodeType(node)
+
+		if (type === 'award-group') {
+			this.awardGroup(node, state)
+		}
+	}
+
+	awardGroup(node, state) {
+		const awardGroup = {
+			type: 'award-group'
+		}
+
+		state.push(awardGroup)
 	}
 
 	body(article, state) {

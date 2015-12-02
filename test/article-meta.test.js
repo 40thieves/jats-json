@@ -532,4 +532,36 @@ describe('Article Meta', () => {
 
 	})
 
+	describe('Funding groups', () => {
+
+		it('extracts funding groups', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<funding-group>
+							<award-group></award-group>
+						</funding-group>
+					</article-meta>
+					<body></body>
+					<back></back>
+				</article>
+			`)
+
+			const contrib = result.article[0].meta[0]
+
+			expect(contrib).to.deep.equal({
+				type: 'article-meta',
+				contributorGroups: [],
+				fundingGroups: [
+					{
+						type: 'award-group'
+					}
+				]
+			})
+		})
+
+	})
+
 })
