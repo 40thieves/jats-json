@@ -549,9 +549,9 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const contrib = result.article[0].meta[0]
+			const meta = result.article[0].meta[0]
 
-			expect(contrib).to.deep.equal({
+			expect(meta).to.deep.equal({
 				type: 'article-meta',
 				contributorGroups: [],
 				fundingGroups: [
@@ -559,6 +559,31 @@ describe('Article Meta', () => {
 						type: 'award-group'
 					}
 				]
+			})
+		})
+
+		it('parses award id', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<funding-group>
+							<award-group>
+								<award-id>PO1 AI091580</award-id>
+							</award-group>
+						</funding-group>
+					</article-meta>
+					<body></body>
+					<back></back>
+				</article>
+			`)
+
+			const meta = result.article[0].meta[0].fundingGroups[0]
+
+			expect(meta).to.deep.equal({
+				type: 'award-group',
+				awardId: 'PO1 AI091580'
 			})
 		})
 

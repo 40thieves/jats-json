@@ -392,6 +392,10 @@ export default class Converter {
 			type: 'award-group'
 		}
 
+		const awardId = node.getElementsByTagName('award-id').item(0)
+
+		if (awardId) awardGroup.awardId = awardId.textContent
+
 		state.push(awardGroup)
 	}
 
