@@ -393,8 +393,10 @@ export default class Converter {
 		}
 
 		const awardId = node.getElementsByTagName('award-id').item(0)
+		const fundingSource = node.getElementsByTagName('funding-source').item(0)
 
-		if (awardId) awardGroup.awardId = awardId.textContent
+		if (awardId) awardGroup.awardId = awardId.textContent.trim()
+		if (fundingSource) awardGroup.fundingSource = fundingSource.textContent.trim()
 
 		state.push(awardGroup)
 	}

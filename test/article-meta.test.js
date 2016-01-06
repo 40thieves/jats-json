@@ -579,11 +579,40 @@ describe('Article Meta', () => {
 				</article>
 			`)
 
-			const meta = result.article[0].meta[0].fundingGroups[0]
+			const fundingGroup = result.article[0].meta[0].fundingGroups[0]
 
-			expect(meta).to.deep.equal({
+			expect(fundingGroup).to.deep.equal({
 				type: 'award-group',
 				awardId: 'PO1 AI091580'
+			})
+		})
+
+		it('parses funding source', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<funding-group>
+							<award-group>
+								<funding-source>
+								    <institution-wrap>
+								        <institution>National Institute of Allergy and Infectious Diseases</institution>
+								    </institution-wrap>
+								</funding-source>
+							</award-group>
+						</funding-group>
+					</article-meta>
+					<body></body>
+					<back></back>
+				</article>
+			`)
+
+			const fundingGroup = result.article[0].meta[0].fundingGroups[0]
+
+			expect(fundingGroup).to.deep.equal({
+				type: 'award-group',
+				fundingSource: 'National Institute of Allergy and Infectious Diseases'
 			})
 		})
 
