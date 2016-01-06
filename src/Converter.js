@@ -398,7 +398,31 @@ export default class Converter {
 		if (awardId) awardGroup.awardId = awardId.textContent.trim()
 		if (fundingSource) awardGroup.fundingSource = fundingSource.textContent.trim()
 
+		const principalAwardRecipients = node.getElementsByTagName('principal-award-recipient').item(0)
+		if (principalAwardRecipients) {
+			awardGroup.principalAwardRecipients = []
+			mapChildNodes(principalAwardRecipients, this.principalAwardRecipient, awardGroup.principalAwardRecipients)
+		}
+
 		state.push(awardGroup)
+	}
+
+	principalAwardRecipient(node, state) {
+		if ( ! node.tagName) return;
+
+		const givenNames = node.getElementsByTagName('given-names').item(0)
+		const surname = node.getElementsByTagName('surname').item(0)
+
+		let name = ''
+
+		if (givenNames && surname)
+			name = `${givenNames.textContent.trim()} ${surname.textContent.trim()}`
+		else if (surname)
+			name = surname.textContent.trim()
+		else if (givenNames)
+			name = givenNames.textContent.trim()
+
+		state.push(name)
 	}
 
 	body(article, state) {

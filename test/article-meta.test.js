@@ -616,6 +616,36 @@ describe('Article Meta', () => {
 			})
 		})
 
+		it('parses recipients', () => {
+			const converter = new Converter
+
+			const result = converter.import(`
+				<article>
+					<article-meta>
+						<funding-group>
+							<award-group>
+								<principal-award-recipient>
+									<name>
+										<surname>O'Donoghue</surname>
+										<given-names>Geoff P</given-names>
+									</name>
+								</principal-award-recipient>
+							</award-group>
+						</funding-group>
+					</article-meta>
+					<body></body>
+					<back></back>
+				</article>
+			`)
+
+			const fundingGroup = result.article[0].meta[0].fundingGroups[0]
+
+			expect(fundingGroup).to.deep.equal({
+				type: 'award-group',
+				principalAwardRecipients: ["Geoff P O'Donoghue"]
+			})
+		})
+
 	})
 
 })
