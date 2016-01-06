@@ -155,7 +155,7 @@ describe('Article Meta', () => {
 				type: 'contributor',
 				id: '',
 				name: '',
-				contributor_type: 'Author'
+				contributorType: 'Author'
 			})
 		})
 

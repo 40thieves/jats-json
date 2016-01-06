@@ -250,7 +250,7 @@ export default class Converter {
 
 		if ( ! type) return
 
-		state.contributor_type = Converter.contribTypes[type]
+		state.contributorType = Converter.contribTypes[type]
 	}
 
 	contribBio(node, state) {
